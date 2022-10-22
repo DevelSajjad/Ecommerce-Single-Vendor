@@ -29,6 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
 //*********************************************User Route*********************************************** */
 Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
+    Route::post('/update/profile',[UserController::class,'updateProfile'])->name('update.profile');
 });
 
 //******************************************FrontEnd Route************************************************* */

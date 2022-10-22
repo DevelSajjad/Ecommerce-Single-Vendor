@@ -24,13 +24,11 @@
 
                         </div>
                         <ul class="list-group list-group-flush">
-                            <a href="#" class="btn btn-primary btn-sm btn-block">Home</a>
-                            <a href="#" class="btn btn-primary btn-sm btn-block">Home</a>
-                            <a href="#" class="btn btn-primary btn-sm btn-block">Home</a>
+                            <a href="#" class="btn btn-primary btn-sm btn-block">Edit Profile</a>
+                            <a href="#" class="btn btn-primary btn-sm btn-block">Update Image</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger btn-sm btn-block">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
-
                             </form>
                         </ul>
                     </div>
@@ -39,14 +37,31 @@
                     <div class="card">
                         <h3 class="text-center"><span class="text-danger">Hi...!!</span><strong class="text-warning">{{ Auth::user()->name; }}</strong> Update Your Profile</h3>
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="{{ route('update.profile') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="">Name</label>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" name="name" value="{{ Auth::user()->name }}" class="form-control">
+                                    @error('name')
+                                        <span class="text-danger"> {{ $message }} </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-danger">Update</button>
+                                    <label for="">Email</label>
+                                    <input type="email" name="email" value="{{ Auth::user()->email }}" class="form-control">
+                                    @error('email')
+                                       <span class="text-danger"> {{ $message }} </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Phone</label>
+                                    <input type="text" name="phone" value="{{ Auth::user()->phone }}" class="form-control">
+                                    @error('phone')
+                                        <span class="text-danger"> {{ $message }} </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger">Update Profile</button>
                                 </div>
                             </form>
                         </div>
