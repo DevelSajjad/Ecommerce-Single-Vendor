@@ -7,7 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Image;
 class UserController extends Controller
 {
     public function index(){
@@ -39,5 +39,37 @@ class UserController extends Controller
 
         // Auth::user()->update($a + ['updated_at' => Carbon::now()]);
         // return redirect()->back();
+    }
+
+    public function userImage(){
+        return view('frontend.userimage');
+    }
+
+    public function updateImage(Request $request){
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,gif|max:5024'
+        ]);
+        $old_image = $request->old_image;
+        if(Auth::user()->image == 'fontend/media/h.jpg'){
+           $image = $request->file('image');
+           $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+           Image::make($image)->resize(320, 240)->save('fontend/media/'.$name_gen);
+            $save_url = 'fontend/media/'.$name_gen;
+
+            User::findOrFail(Auth::id())->update([
+                'image' => $save_url
+            ]);
+        }else{
+            unlink($old_image);
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(320, 240)->save('fontend/media/'.$name_gen);
+            $save_url = 'fontend/media/'.$name_gen;
+            User::findOrFail(Auth::id())->update([
+                'image' => $save_url
+            ]);
+        }
+
+        return redirect()->back()->with('message','Image Update Successful');
     }
 }

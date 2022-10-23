@@ -30,6 +30,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
 Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::post('/update/profile',[UserController::class,'updateProfile'])->name('update.profile');
+    Route::get('/userimage',[UserController::class,'userImage'])->name('user-image');
+    Route::post('/update-profile-image',[UserController::class,'updateImage'])->name('update-profile-image');
 });
 
 //******************************************FrontEnd Route************************************************* */
