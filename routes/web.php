@@ -32,6 +32,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/update/profile',[UserController::class,'updateProfile'])->name('update.profile');
     Route::get('/userimage',[UserController::class,'userImage'])->name('user-image');
     Route::post('/update-profile-image',[UserController::class,'updateImage'])->name('update-profile-image');
+    Route::get('/update-password',[UserController::class,'updatePasswordPage'])->name('update-password');
+    Route::post('change-password',[UserController::class,'changePassword'])->name('change-password');
 });
 
 //******************************************FrontEnd Route************************************************* */

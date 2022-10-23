@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Image;
 class UserController extends Controller
 {
@@ -42,7 +43,7 @@ class UserController extends Controller
     }
 
     public function userImage(){
-        return view('frontend.userimage');
+        return view('user.userimage');
     }
 
     public function updateImage(Request $request){
@@ -69,7 +70,32 @@ class UserController extends Controller
                 'image' => $save_url
             ]);
         }
-
         return redirect()->back()->with('message','Image Update Successful');
+    }
+    public function updatePasswordPage(){
+        return view('user.password');
+    }
+    public function changePassword(Request $request){
+        $request->validate([
+            'oldPassword' => 'required',
+            'newPassword' => 'required',
+            'confirmPassword' => 'required',
+        ]);
+        $oldPass = Auth::user()->password;
+        $currentOld = $request->oldPassword;
+        $newPass = $request->newPassword;
+        $confirmPass = $request->confirmPassword;
+        if(Hash::check($currentOld,$oldPass)){
+            if($newPass === $confirmPass){
+                User::findOrFail(Auth::id())->update([
+                    'password' => Hash::make($newPass)
+                ]);
+            }else{
+                return redirect()->back()->with('error','New Password and Confirm Password Not Match');
+            }
+        }else{
+            return redirect()->back()->with('error','Enter Your Correct Old Password');
+        }
+        return redirect()->back()->with('message','Password Change Successful');
     }
 }

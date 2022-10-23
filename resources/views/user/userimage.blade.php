@@ -25,6 +25,7 @@
                         <ul class="list-group list-group-flush">
                             <a href="#" class="btn btn-primary btn-sm btn-block">Edit Profile</a>
                             <a href="#" class="btn btn-primary btn-sm btn-block">Update Image</a>
+                            <a href="{{ route('update-password') }}" class="btn btn-primary btn-sm btn-block">Change Password</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger btn-sm btn-block">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
