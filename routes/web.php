@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,13 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace' => 'App\Http\Controllers\Admin'], function () {
     Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
+    // **************************Admin Profile***************************
+    Route::get('edit-page',[AdminController::class,'editPage'])->name('edit-page');
+    Route::post('admin-update-profile',[AdminController::class,'adminUpdate'])->name('admin.update.profile');
+    Route::get('admin/image',[AdminController::class,'showImage'])->name('admin-image');
+    Route::post('admin/update/image',[AdminController::class,'adminUpdateImage'])->name('admin-image-update');
+    Route::get('change/password',[AdminController::class,'adminPassword'])->name('admin-password');
+    Route::post('admin/update/password',[AdminController::class,'updatePassword'])->name('admin-update-password');
 });
 
 //*********************************************User Route*********************************************** */
