@@ -1,12 +1,12 @@
 @extends('admin.master')
 @section('brands')
-active
+    active
 @endsection
 @section('body')
 <div class="sl-mainpanel">
         <nav class="breadcrumb sl-breadcrumb">
-            <a class="breadcrumb-item" href="index.html">Starlight</a>
-            <span class="breadcrumb-item active">Dashboard</span>
+            <a class="breadcrumb-item" href="{{ route('brands') }}">Starlight</a>
+            <span class="breadcrumb-item ">Dashboard</span>
         </nav>
     <div class="sl-pagebody">
         <div class="row row-sm">
@@ -31,7 +31,7 @@ active
                             <td>{{ $brandData->brand_name_bn }}</td>
                             <td>
                                 <a href="{{ url('admin/edit-brand',$brandData->id) }}" class="btn btn-info btn-sm"><i title="Edit Brand" class="fa fa-pencil"></i></a>
-                                <a href="{{ url('/admin/delete',$brandData->id) }}" class="btn btn-danger btn-sm" id="delete" title="Brand Delete"><i class="fa fa-trash"></i></a>
+                                <a href="{{ url('/admin/delete/brand/',$brandData->id) }}" class="btn btn-danger btn-sm" id="delete" title="Brand Delete"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

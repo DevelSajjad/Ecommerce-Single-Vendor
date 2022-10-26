@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
@@ -37,8 +38,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/brands',[BrandController::class,'brands'])->name('brands');
     Route::post('/add_brand',[BrandController::class,'addBrand'])->name('add-brand');
     Route::get('/edit-brand/{brand_id}',[BrandController::class,'edit']);
-    Route::get('/delete/{brand_id}',[BrandController::class,'brandDelete']);
+    Route::get('/delete/brand/{brand_id}',[BrandController::class,'brandDelete']);
     Route::post('/brand-update',[BrandController::class,'brandUpdate'])->name('brand-update');
+    // ***************************Category********************
+    Route::get('/category',[CategoryController::class,'categoryView'])->name('category');
+    Route::post('/add-category',[CategoryController::class,'addCategory'])->name('add-category');
+    Route::get('/delete-category/{catId}',[CategoryController::class,'deleteCat']);
+    Route::get('/edit-category/{editId}',[CategoryController::class,'editShow']);
+    Route::post('/update-category',[CategoryController::class,'updateCat'])->name('update-category');
+
+    // *********************Sub Category*******************
+    Route::get('/subcategory',[CategoryController::class,'subCategory'])->name('sub-category');
 });
 
 //*********************************************User Route*********************************************** */

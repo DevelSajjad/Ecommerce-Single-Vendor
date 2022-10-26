@@ -18,7 +18,7 @@ class BrandController extends Controller
             
                'brand_name_en' => 'required',
                 'brand_name_bn' => 'required',
-                'brand_image' => 'required|image|mimes:jpg,png,gif|max:5024',
+                'brand_image' => 'required|image|mimes:jpg,jpeg,png,gif|max:5024',
         ],
         [
             
