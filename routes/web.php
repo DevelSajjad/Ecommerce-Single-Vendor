@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
@@ -60,6 +61,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/editSubSubCat/{editSubId}',[CategoryController::class,'subSubEditShow']);
     Route::post('/updateSubSubCategory',[CategoryController::class,'updateSubSubCat'])->name('Update-Sub-Sub');
     Route::get('/deleteSubSubCategory/{deleteId}',[CategoryController::class,'deleteSubSub']);
+    // ***************Product****************
+    Route::get('/add-product',[ProductController::class,'addProduct'])->name('add-product');
 
 });
 
