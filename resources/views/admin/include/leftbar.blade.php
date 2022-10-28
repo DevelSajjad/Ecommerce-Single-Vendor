@@ -31,6 +31,7 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('category') }}" class="nav-link @yield('addCategory') ">Add Category</a></li>
           <li class="nav-item"><a href="{{ route('sub-category') }}" class="nav-link @yield('subcategory') ">Add Sub-Category</a></li>
+          <li class="nav-item"><a href="{{ route('sub-sub-category') }}" class="nav-link @yield('subsubcategory') ">Add Sub-Sub-Category</a></li>
         </ul>
         <!-- sl-menu-link -->
       </div><!-- sl-sideleft-menu -->

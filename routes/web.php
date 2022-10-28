@@ -53,6 +53,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/editSubCategory/{subId}',[CategoryController::class,'subEditShow']);
     Route::post('/updateSubcategory',[CategoryController::class,'updateSubcategory'])->name('update-subcategory');
     Route::get('deleteSubCategory/{deleteId}',[CategoryController::class,'deleteSub']);
+    //********************SubsubCategory********************* */
+    Route::get('/SubSubCategory',[CategoryController::class,'subSubCategory'])->name('sub-sub-category');
+    Route::get('/subcategory/ajax/{cat_id}',[CategoryController::class,'getSubCat']);
+    Route::post('/addSubSubCategory',[CategoryController::class,'addSubSubCategory'])->name('add-sub-sub-category');
+    Route::get('/editSubSubCat/{editSubId}',[CategoryController::class,'subSubEditShow']);
+    Route::post('/updateSubSubCategory',[CategoryController::class,'updateSubSubCat'])->name('Update-Sub-Sub');
+    Route::get('/deleteSubSubCategory/{deleteId}',[CategoryController::class,'deleteSubSub']);
+
 });
 
 //*********************************************User Route*********************************************** */

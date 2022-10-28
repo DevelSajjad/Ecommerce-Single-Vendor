@@ -357,7 +357,8 @@
         @endif
       </script>
       <script src="{{ asset('/') }}backend/lib/sweetalert/sweetalert.min.js"></script>
-      <script>
+     
+     <script>
             $(document).on("click", "#delete", function(e){
             e.preventDefault();
             var link = $(this).attr("href");
