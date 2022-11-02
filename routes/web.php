@@ -63,6 +63,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/deleteSubSubCategory/{deleteId}',[CategoryController::class,'deleteSubSub']);
     // ***************Product****************
     Route::get('/add-product',[ProductController::class,'addProduct'])->name('add-product');
+    Route::get('/subsubcategory/ajax/{subcatId}',[ProductController::class,'getSubSubCat']);
+    Route::post('/store-product',[ProductController::class,'storeProduct'])->name('store-product');
+    Route::get('/Manage_Product',[ProductController::class,'manageProduct'])->name('manage-product');
+    Route::get('/edit-product/{id}',[ProductController::class,'editProduct']);
+    Route::post('/update_product',[ProductController::class,'updateProduct'])->name('update-product');
 
 });
 

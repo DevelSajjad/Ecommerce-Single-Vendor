@@ -37,6 +37,10 @@
     <link href="{{ asset('/') }}backend/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link href="{{ asset('/') }}backend/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="{{ asset('/') }}backend/lib/select2/css/select2.min.css" rel="stylesheet">
+    <link href="{{ asset('/') }}backend/lib/medium-editor/medium-editor.css" rel="stylesheet">
+    <link href="{{ asset('/') }}backend/lib/medium-editor/default.css" rel="stylesheet">
+    <link href="{{ asset('/') }}backend/lib/summernote/summernote-bs4.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}backend/css/starlight.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -221,6 +225,7 @@
     <script src="{{ asset('/') }}backend/lib/jquery/jquery.js"></script>
     <script src="{{ asset('/') }}backend/lib/popper.js/popper.js"></script>
     <script src="{{ asset('/') }}backend/lib/bootstrap/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" integrity="sha512-9UR1ynHntZdqHnwXKTaOm1s6V9fExqejKvg5XMawEMToW4sSw+3jtLrYfZPijvnwnnE8Uol1O9BcAskoxgec+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('/') }}backend/lib/jquery-ui/jquery-ui.js"></script>
     <script src="{{ asset('/') }}backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
     <script src="{{ asset('/') }}backend/lib/datatables/jquery.dataTables.js"></script>
@@ -307,6 +312,37 @@
 
       });
     </script>
+    {{-- //Texteditor --}}
+    <script src="{{ asset('/') }}backend/lib/medium-editor/medium-editor.js"></script>
+    <script src="{{ asset('/') }}backend/lib/summernote/summernote-bs4.min.js"></script>
+    <script>
+      $(function(){
+        'use strict';
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote').summernote({
+          height: 150,
+          tooltip: false
+        });
+        $('#summernote2').summernote({
+          height: 150,
+          tooltip: false
+        });
+        $('#summernote3').summernote({
+          height: 150,
+          tooltip: false
+        });
+        $('#summernote4').summernote({
+          height: 150,
+          tooltip: false
+        });
+      });
+
+        
+    </script>
+    {{-- Texteditor end --}}
     <script src="{{ asset('/') }}backend/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="{{ asset('/') }}backend/lib/d3/d3.js"></script>
     <script src="{{ asset('/') }}backend/lib/rickshaw/rickshaw.min.js"></script>
@@ -318,6 +354,7 @@
     <script src="{{ asset('/') }}backend/js/starlight.js"></script>
     <script src="{{ asset('/') }}backend/js/ResizeSensor.js"></script>
     <script src="{{ asset('/') }}backend/js/dashboard.js"></script>
+    {{-- ///// Toastr Message //// --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         @if(Session::has('message'))
@@ -356,6 +393,8 @@
                 toastr.warning("{{ session('warning') }}");
         @endif
       </script>
+      {{-- //// Toastr Message End///// --}}
+      {{-- ///Sweet Alert // --}}
       <script src="{{ asset('/') }}backend/lib/sweetalert/sweetalert.min.js"></script>
      
      <script>
@@ -378,5 +417,6 @@
               });
         })
       </script>
+      {{-- //// Sweet Alert //// --}}
   </body>
 </html>
