@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
@@ -73,6 +74,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('thumb-image-update',[ProductController::class,'thumbImageUpdate'])->name('thumb-image-update');
     Route::get('/status-inactive/{id}',[ProductController::class,'statusInactive']);
     Route::get('/status-active/{id}',[ProductController::class,'statusActive']);
+    ///////////////////Slider//////////////////
+    Route::get('/slider',[SlideController::class,'showSlide'])->name('slider');
+    Route::post('/store-slide',[SlideController::class,'saveSlide'])->name('add-slide');
 
 });
 
