@@ -62,12 +62,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('/updateSubSubCategory',[CategoryController::class,'updateSubSubCat'])->name('Update-Sub-Sub');
     Route::get('/deleteSubSubCategory/{deleteId}',[CategoryController::class,'deleteSubSub']);
     // ***************Product****************
-    Route::get('/add-product',[ProductController::class,'addProduct'])->name('add-product');
-    Route::get('/subsubcategory/ajax/{subcatId}',[ProductController::class,'getSubSubCat']);
-    Route::post('/store-product',[ProductController::class,'storeProduct'])->name('store-product');
-    Route::get('/Manage_Product',[ProductController::class,'manageProduct'])->name('manage-product');
-    Route::get('/edit-product/{id}',[ProductController::class,'editProduct']);
-    Route::post('/update_product',[ProductController::class,'updateProduct'])->name('update-product');
+    Route::get('/add-product', [ProductController::class,'addProduct'])->name('add-product');
+    Route::get('/subsubcategory/ajax/{subcatId}', [ProductController::class,'getSubSubCat']);
+    Route::post('/store-product', [ProductController::class,'storeProduct'])->name('store-product');
+    Route::get('/Manage_Product', [ProductController::class,'manageProduct'])->name('manage-product');
+    Route::get('/edit-product/{id}', [ProductController::class,'editProduct']);
+    Route::post('/update_product', [ProductController::class,'updateProduct'])->name('update-product');
+    Route::get('multiImage-delete/{id}',[ProductController::class, 'deleteMultiImage']);
+    Route::post('multiImage-update',[ProductController::class,'multiImageUpdate'])->name('multi-image-update');
+    Route::post('thumb-image-update',[ProductController::class,'thumbImageUpdate'])->name('thumb-image-update');
+    Route::get('/status-inactive/{id}',[ProductController::class,'statusInactive']);
+    Route::get('/status-active/{id}',[ProductController::class,'statusActive']);
 
 });
 
@@ -79,6 +84,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/update-profile-image',[UserController::class,'updateImage'])->name('update-profile-image');
     Route::get('/update-password',[UserController::class,'updatePasswordPage'])->name('update-password');
     Route::post('change-password',[UserController::class,'changePassword'])->name('change-password');
+
 });
 
 //******************************************FrontEnd Route************************************************* */

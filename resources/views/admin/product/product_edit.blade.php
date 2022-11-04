@@ -272,6 +272,44 @@
                 </div><!-- form-layout-footer -->
             </form>
             </div>
+               <form action="{{ route('multi-image-update') }}" method="post" enctype="multipart/form-data">
+                  @csrf
+                    <div class="row row-sm mt-5">
+                        @foreach ($multiImg as $images)
+                          <div class="col-md-4">
+                            <div class="card-deck">
+                              <div class="card">
+                                <img class="card-img-top" src="{{ asset($images->photo_name) }}" alt="Card image cap">
+                                <div class="card-body">
+                                  <h5 class="card-title"> <a href="{{ url('admin/multiImage-delete',$images->id) }}" id="delete" class="btn btn-danger">X</a></h5>
+                                  <input class="form-control" type="file" name="multi_img[{{ $images->id }}]">
+                                </div>
+                              </div>
+                            </div> 
+                          </div>
+                        @endforeach
+                    </div>
+                    <button type="submit" class="btn btn-primary ml-5">Update Image</button>
+                  </form>
+
+                  <form action="{{ route('thumb-image-update') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="pro_id" value="{{ $product->id }}">
+                    <input type="hidden" name="old_img" value="{{ $product->product_thumbnail }}">
+                      <div class="row row-sm mt-5">
+                            <div class="col-md-4">
+                              <div class="card-deck">
+                                <div class="card">
+                                  <img class="card-img-top" src="{{ asset($product->product_thumbnail) }}" alt="Card image cap">
+                                  <div class="card-body">
+                                    <input class="form-control" type="file" name="thumb_img">
+                                  </div>
+                                </div>
+                              </div> 
+                            </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary ml-5">Update Thumb Image</button>
+                    </form>
             </div><!-- row -->
 
             

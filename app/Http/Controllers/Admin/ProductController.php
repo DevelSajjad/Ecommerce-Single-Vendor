@@ -94,7 +94,7 @@ class ProductController extends Controller
        foreach ($multi_image as $img ) {
         $name_mult_gen = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
         Image::make($img)->resize(917,1000)->save('uploads/multiImg/'.$name_mult_gen);
-        $save_multi_url = 'uploads/multImg/'.$name_mult_gen;
+        $save_multi_url = 'uploads/multiImg/'.$name_mult_gen;
         MultiImg::insert([
             'product_id' => $product_id,
             'photo_name' => $save_multi_url,
@@ -113,7 +113,8 @@ class ProductController extends Controller
         $product = Product::findOrFail($product_id);
         $brand = Brand::latest()->get();
         $category = Category::latest()->get();
-        return view('admin.product.product_edit',compact('product', 'brand', 'category'));
+        $multiImg = MultiImg::where('product_id',$product_id)->latest()->get();
+        return view('admin.product.product_edit',compact('product', 'brand', 'category','multiImg'));
     }
     public function updateProduct(Request $request)
     {
@@ -152,7 +153,8 @@ class ProductController extends Controller
             'product_name_en' => $request->product_name_en,
             'product_name_bn' => $request->product_name_bn,
             'product_slug_en' => strtolower(str_replace('','-',$request->product_name_en)),
-            'product_slug_bn' => str_replace('','-',$request->product_name_bn),
+            'product_slu
+            g_bn' => str_replace('','-',$request->product_name_bn),
             'product_tags_en' => $request->product_tags_en,
             'product_tags_bn' => $request->product_tags_bn,
             'product_code' => $request->product_code,
@@ -176,5 +178,56 @@ class ProductController extends Controller
            ]);
 
            return redirect()->route('manage-product')->with('message','Product Update Successful');
+    }
+    public function deleteMultiImage($id)
+    {
+       $img = MultiImg::findOrFail($id);
+        unlink($img->photo_name);
+        $img->delete();
+        return redirect()->back();
+    }
+    public function multiImageUpdate(Request $request)
+    {
+        $image = $request->file('multi_img');
+        foreach ($image as $key => $img) {
+            $id = MultiImg::findOrFail($key);
+            unlink($id->photo_name);
+            $name_mult_gen = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(917,1000)->save('uploads/multiImg/'.$name_mult_gen);
+            $save_multi_url = 'uploads/multiImg/'.$name_mult_gen;
+            MultiImg::where('id',$key)->update([
+                'photo_name' => $save_multi_url,
+            ]);
+        }
+        return redirect()->back()->with('message','Multi Image Update Successful');
+    }
+
+    public function thumbImageUpdate(Request $request)
+    {
+        $proId = $request->pro_id;
+        $oldImg =$request->old_img;
+        unlink($oldImg);
+        $image = $request->file('thumb_img');
+       $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+       Image::make($image)->resize(300,300)->save('uploads/thumb/'.$name_gen);
+       $save_url = 'uploads/thumb/'.$name_gen;
+        Product::findOrFail($proId)->update([
+            'product_thumbnail' => $save_url
+        ]);
+        return redirect()->back()->with('message','Image Thumbnail Successful');
+    }
+    public function statusInactive($id)
+    {
+        Product::findOrFail($id)->update([
+            'status' => 0
+        ]);
+        return redirect()->back();
+    }
+    public function statusActive($id)
+    {
+        Product::findOrFail($id)->update([
+            'status' => 1
+        ]);
+        return redirect()->back();
     }
 }
