@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,9 +75,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('thumb-image-update',[ProductController::class,'thumbImageUpdate'])->name('thumb-image-update');
     Route::get('/status-inactive/{id}',[ProductController::class,'statusInactive']);
     Route::get('/status-active/{id}',[ProductController::class,'statusActive']);
+    Route::get('/delete-product/{id}',[ProductController::class,'deleteProduct']);
     ///////////////////Slider//////////////////
     Route::get('/slider',[SlideController::class,'showSlide'])->name('slider');
     Route::post('/store-slide',[SlideController::class,'saveSlide'])->name('add-slide');
+    Route::get('/slide-edit/{id}',[SlideController::class,'slideEdit']);
+    Route::post('/slide-update',[SlideController::class,'slideUpdate'])->name('slide-update');
+    Route::get('/delete-slide/{id}',[SlideController::class,'slideDelete']);
+    Route::get('/slide-status-inactive/{id}',[SlideController::class,'statusInactive']);
+    Route::get('/slide-status-active/{id}',[SlideController::class,'statusActive']);
 
 });
 
@@ -93,4 +100,5 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
 
 //******************************************FrontEnd Route************************************************* */
 
-
+Route::get('/english-language',[LanguageController::class,'englishLanguage'])->name('english-language');
+Route::get('/bangla-language',[LanguageController::class,'banglaLanguage'])->name('bangla-language');

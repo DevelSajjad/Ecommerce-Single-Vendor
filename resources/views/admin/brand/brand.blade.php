@@ -31,7 +31,7 @@
                             <td>{{ $brandData->brand_name_bn }}</td>
                             <td>
                                 <a href="{{ url('admin/edit-brand',$brandData->id) }}" class="btn btn-info btn-sm"><i title="Edit Brand" class="fa fa-pencil"></i></a>
-                                <a href="{{ url('/admin/delete/brand/',$brandData->id) }}" class="btn btn-danger btn-sm" id="delete" title="Brand Delete"><i class="fa fa-trash"></i></a>
+                                <a href="{{ url('/admin/delete/brand',$brandData->id) }}" class="btn btn-danger btn-sm" id="delete" title="Brand Delete"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

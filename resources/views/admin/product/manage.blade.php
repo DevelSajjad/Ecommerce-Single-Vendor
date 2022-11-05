@@ -53,7 +53,7 @@ active
                             </td>
                             <td>
                                 <a href="{{ url('admin/edit-product',$products->id) }}" class="btn btn-info btn-sm"><i title="Edit Product" class="fa fa-pencil"></i></a>
-                                <a href="{{ url('/admin/delete/product/',$products->id) }}" class="btn btn-danger btn-sm" id="delete" title="Product Delete"><i class="fa fa-trash"></i></a>
+                                <a href="{{ url('/admin/delete-product',$products->id) }}" class="btn btn-danger btn-sm" id="delete" title="Product Delete"><i class="fa fa-trash"></i></a>
                                 @if ($products->status == 1)
                                     <a href="{{ url('admin/status-inactive',$products->id) }}" class="btn btn-danger btn-sm">Inactive</a>  
                                     @else

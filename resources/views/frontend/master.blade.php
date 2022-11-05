@@ -49,18 +49,18 @@
 		<div class="header-top-inner">
 			<div class="cnt-account">
 				<ul class="list-unstyled">
-					<li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-					<li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-					<li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-					<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
+					<li><a href="#"><i class="icon fa fa-user"></i>{{ (session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল' }}</a></li>
+					<li><a href="#"><i class="icon fa fa-heart"></i>{{ (session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা' }}</a></li>
+					<li><a href="#"><i class="icon fa fa-shopping-cart"></i>{{ (session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট' }}</a></li>
+					<li><a href="#"><i class="icon fa fa-check"></i>{{ (session()->get('language') == 'english') ? 'Checkout' : 'চেকআউট' }}</a></li>
                     @auth
-                        <li><a href="{{ route('user.dashboard') }}"><i class="icon fa fa-check"></i>Profile</a></li>
-                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon fa fa-check"></i>Logout</a></li>
+                        <li><a href="{{ route('user.dashboard') }}"><i class="icon fa fa-check"></i>{{ (session()->get('language') == 'english') ? 'Profile' : 'প্রোফাইল' }}</a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon fa fa-check"></i>{{ route('login') }}"><i class="icon fa fa-lock"></i>{{ (session()->get('language') == 'english') ? 'Logout' : 'লগআউট' }}</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="post">
                             @csrf
                         </form>
                         @else
-                        <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
+                        <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>{{ (session()->get('language') == 'english') ? 'Login/Register' : 'লগিন/রেজিস্টার' }}</a></li>
                     @endauth
 
 				</ul>
@@ -78,11 +78,13 @@
 					</li>
 
 					<li class="dropdown dropdown-small">
-						<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">{{ (session()->get('language') == 'english') ? 'English' : 'ভাষা পরিবর্তন' }} </span><b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">English</a></li>
-							<li><a href="#">French</a></li>
-							<li><a href="#">German</a></li>
+                            @if (session()->get('language') == 'bangla')
+                                <li><a href="{{ route('english-language') }}">English</a></li>
+                                @else
+                                <li><a href="{{ route('bangla-language') }}">বাংলা</a></li>
+                            @endif
 						</ul>
 					</li>
 				</ul><!-- /.list-unstyled -->
@@ -602,11 +604,11 @@
 
                     <div class="module-body">
                         <ul class='list-unstyled'>
-                            <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                <li><a href="#" title="About us">Order History</a></li>
-                <li><a href="#" title="faq">FAQ</a></li>
-                <li><a href="#" title="Popular Searches">Specials</a></li>
-                <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+                            <li class="first"><a href="#" title="Contact us">{{ (session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল' }}</a></li>
+                <li><a href="#" title="About us">{{ (session()->get('language') == 'english' ? 'Order History' : 'আমার অডার') }}</a></li>
+                <li><a href="#" title="faq">{{ (session()->get('language') == 'english' ? 'FAQ' : 'এফএকিউ') }}</a></li>
+                <li><a href="#" title="Popular Searches">{{ (session()->get('language') == 'english' ? 'Specials' : 'বিশেষ') }}</a></li>
+                <li class="last"><a href="#" title="Where is my order?">{{ (session()->get('language') == 'english' ? 'Help Center' : 'সাহা্য্য কেন্দ্র') }}</a></li>
                         </ul>
                     </div><!-- /.module-body -->
                 </div><!-- /.col -->
