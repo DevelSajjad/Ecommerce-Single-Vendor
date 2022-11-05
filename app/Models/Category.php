@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $guarded = [
-
-    ];
+    protected $guarded = [];
+    public function subCategories()
+    {
+        return $this->hasMany(Subcategory::class, 'category_id', 'id');
+    }
 }
