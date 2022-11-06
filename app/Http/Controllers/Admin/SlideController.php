@@ -17,11 +17,11 @@ class SlideController extends Controller
     public function saveSlide(Request $request)
     {
         $request->validate([
-            'slide_image' => 'image|required',
+            'slide_image' => 'image|required|mimes:jpeg,jpg,png,gif|max:5024',
         ]);
         $image = $request->file('slide_image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(166,110)->save('uploads/slider/'.$name_gen);
+        Image::make($image)->resize(1000,500)->save('uploads/slider/'.$name_gen);
         $save_url = 'uploads/slider/'.$name_gen;
 
         Slider::insert([
@@ -46,7 +46,7 @@ class SlideController extends Controller
             unlink($old_img);
             $image = $request->file('slide_image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(166,110)->save('uploads/slider/'.$name_gen);
+            Image::make($image)->resize(1000,500)->save('uploads/slider/'.$name_gen);
             $save_url = 'uploads/slider/'.$name_gen;
             Slider::findOrFail($slide_id)->update([
                 'title_en' => $request->slide_title_en,

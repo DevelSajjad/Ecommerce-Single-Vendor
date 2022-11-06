@@ -39,7 +39,8 @@ active
                                     @else  
                                     @php
                                         $amount = $products->selling_price - $products->discount_price;
-                                        $disPer = round(($amount/$products->selling_price) * 100);
+                                        $per = round(($amount/$products->selling_price) * 100);
+                                        $disPer = 100 - $per;
                                     @endphp
                                     <span> {{ $disPer }}%</span>
                                 @endif
