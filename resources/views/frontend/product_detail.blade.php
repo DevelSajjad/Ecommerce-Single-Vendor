@@ -1,4 +1,7 @@
 @extends('frontend.master')
+@section('title')
+	{{ $products->product_name_en }}
+@endsection
 @section('content')
 	@php
 		function priceBn($bnPrice)
@@ -182,7 +185,7 @@
                     </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
-							<h1 class="name">Floral Print Buttoned</h1>
+							<h1 class="name">{{ (session()->get('language') == 'english') ? $products->product_name_en : $products->product_name_bn }}</h1>
 							<div class="rating-reviews m-t-20">
 								<div class="row">
 									<div class="col-sm-3">
@@ -212,7 +215,7 @@
 							</div><!-- /.stock-container -->
 
 							<div class="description-container m-t-20">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+								{{ (session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn }}
 							</div><!-- /.description-container -->
 
 							<div class="price-container info-container m-t-20">
@@ -221,8 +224,8 @@
 
 									<div class="col-sm-6">
 										<div class="price-box">
-											<span class="price">$800.00</span>
-											<span class="price-strike">$900.00</span>
+											<span class="price">TK {{ (session()->get('language') == 'english') ? $products->selling_price : priceBn($products->selling_price) }}</span>
+											<span class="price-strike">TK {{ (session()->get('language') == 'english') ? $products->discount_price : priceBn($products->discount_price) }}</span>
 										</div>
 									</div>
 
@@ -277,7 +280,7 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-								<li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
+								<li class="active"><a data-toggle="tab" href="#description">Description</a></li>
 								<li><a data-toggle="tab" href="#review">REVIEW</a></li>
 								<li><a data-toggle="tab" href="#tags">TAGS</a></li>
 							</ul><!-- /.nav-tabs #product-tabs -->
@@ -288,7 +291,7 @@
 								
 								<div id="description" class="tab-pane in active">
 									<div class="product-tab">
-										<p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										<p class="text">{{ (session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn }}</p>
 									</div>	
 								</div><!-- /.tab-pane -->
 

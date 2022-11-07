@@ -102,4 +102,4 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
 
 Route::get('/english-language',[LanguageController::class,'englishLanguage'])->name('english-language');
 Route::get('/bangla-language',[LanguageController::class,'banglaLanguage'])->name('bangla-language');
-Route::get('/single-product-detail/{id}',[IndexController::class,'productDetail']);
+Route::get('/single-product-detail/{id}/{slug}',[IndexController::class,'productDetail']);

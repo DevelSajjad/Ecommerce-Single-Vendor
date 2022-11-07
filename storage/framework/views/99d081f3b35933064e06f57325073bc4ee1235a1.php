@@ -11,7 +11,7 @@
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
 
-    <title>Flipmart premium HTML5 & CSS3 Template</title>
+    <title> <?php echo $__env->yieldContent('title'); ?> </title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('/')); ?>fontend/assets/css/bootstrap.min.css">

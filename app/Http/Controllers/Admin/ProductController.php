@@ -153,8 +153,7 @@ class ProductController extends Controller
             'product_name_en' => $request->product_name_en,
             'product_name_bn' => $request->product_name_bn,
             'product_slug_en' => strtolower(str_replace('','-',$request->product_name_en)),
-            'product_slu
-            g_bn' => str_replace('','-',$request->product_name_bn),
+            'product_slug_bn' => str_replace('','-',$request->product_name_bn),
             'product_tags_en' => $request->product_tags_en,
             'product_tags_bn' => $request->product_tags_bn,
             'product_code' => $request->product_code,
