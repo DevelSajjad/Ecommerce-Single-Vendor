@@ -215,7 +215,7 @@
 							</div><!-- /.stock-container -->
 
 							<div class="description-container m-t-20">
-								{{ (session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn }}
+								{!!  (session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn  !!}
 							</div><!-- /.description-container -->
 
 							<div class="price-container info-container m-t-20">
@@ -291,7 +291,7 @@
 								
 								<div id="description" class="tab-pane in active">
 									<div class="product-tab">
-										<p class="text">{{ (session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn }}</p>
+										<p class="text">{!! (session()->get('language') == 'english') ? $products->long_descp_en : $products->long_descp_bn !!}</p>
 									</div>	
 								</div><!-- /.tab-pane -->
 

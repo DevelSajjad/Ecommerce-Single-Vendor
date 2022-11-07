@@ -13,10 +13,17 @@ class IndexController extends Controller
 {
     public function index()
     {
+        // cache()->set('name', 'mamun');
+        // dd(cache()->get('name'));
+        // dd(request()->server('HTTP_USER_AGENT'));
         $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
         $data['sliders']    = Slider::where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
         $data['products']   = Product::where('status', 1)->orderBY('id', 'desc')->get();
         $data['features']   = Product::where('featured', 1)->where('status', 1)->orderBy('id', 'desc')->get();
+        $data['hotDeals']   = Product::where('hot_deals', 1)->where('status', 1)->orderBy('id', 'desc')->get();
+        $data['specialOffer']   = Product::where('special_offer', 1)->where('status', 1)->orderBy('id', 'desc')->get()->chunk(3);
+        $data['specialDeals']   = Product::where('special_deals', 1)->where('status', 1)->orderBy('id', 'desc')->get()->chunk(3);
+        // dd($data['specialOffer']);
         return view('frontend.index', $data );
     }
     public function productDetail($id,$slug)

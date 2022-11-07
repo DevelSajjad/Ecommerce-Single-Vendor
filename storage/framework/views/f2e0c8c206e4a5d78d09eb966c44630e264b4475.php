@@ -216,7 +216,7 @@
 							</div><!-- /.stock-container -->
 
 							<div class="description-container m-t-20">
-								<?php echo e((session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn); ?>
+								<?php echo (session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn; ?>
 
 							</div><!-- /.description-container -->
 
@@ -293,7 +293,7 @@
 								
 								<div id="description" class="tab-pane in active">
 									<div class="product-tab">
-										<p class="text"><?php echo e((session()->get('language') == 'english') ? $products->short_descp_en : $products->short_descp_bn); ?></p>
+										<p class="text"><?php echo (session()->get('language') == 'english') ? $products->long_descp_en : $products->long_descp_bn; ?></p>
 									</div>	
 								</div><!-- /.tab-pane -->
 
