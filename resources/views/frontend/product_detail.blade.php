@@ -17,9 +17,9 @@
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Clothing</a></li>
-				<li class='active'>Floral Print Buttoned</li>
+				<li><a href="{{ url('/') }}">Home</a></li>
+				<li><a href="#">{{ $products->categories()->first()->category_name_en }}</a></li>
+				<li class='active'>{{ $products->product_name_en }}</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -126,29 +126,7 @@
 <!-- ============================================== NEWSLETTER: END ============================================== -->
 
 <!-- ============================================== Testimonials============================================== -->
-<div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-	<div id="advertisement" class="advertisement">
-        <div class="item">
-            <div class="avatar"><img src="{{ asset('/') }}fontend/assets/images/testimonials/member1.png" alt="Image"></div>
-		<div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-		<div class="clients_author">John Doe	<span>Abc Company</span>	</div><!-- /.container-fluid -->
-        </div><!-- /.item -->
-
-         <div class="item">
-         	<div class="avatar"><img src="{{ asset('/') }}fontend/assets/images/testimonials/member3.png" alt="Image"></div>
-		<div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-		<div class="clients_author">Stephen Doe	<span>Xperia Designs</span>	</div>    
-        </div><!-- /.item -->
-
-        <div class="item">
-            <div class="avatar"><img src="{{ asset('/') }}fontend/assets/images/testimonials/member2.png" alt="Image"></div>
-		<div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-		<div class="clients_author">Saraha Smith	<span>Datsun &amp; Co</span>	</div><!-- /.container-fluid -->
-        </div><!-- /.item -->
-
-    </div><!-- /.owl-carousel -->
-</div>
-    
+	@include('frontend.include.testimonials')    
 <!-- ============================================== Testimonials: END ============================================== -->
 
  
@@ -775,73 +753,7 @@
 			<div class="clearfix"></div>
 		</div><!-- /.row -->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<div id="brands-carousel" class="logo-slider wow fadeInUp">
 
-		<div class="logo-slider-inner">	
-			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-				<div class="item m-t-15">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand1.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item m-t-10">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand2.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand3.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand4.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand5.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand6.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand2.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand4.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand1.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="{{ asset('/') }}fontend/assets/images/brands/brand5.png" src="{{ asset('/') }}fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-		    </div><!-- /.owl-carousel #logo-slider -->
-		</div><!-- /.logo-slider-inner -->
-	
-</div><!-- /.logo-slider -->
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
 

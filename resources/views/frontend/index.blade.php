@@ -16,37 +16,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 
 			<!-- ================================== TOP NAVIGATION ================================== -->
-<div class="side-menu animate-dropdown outer-bottom-xs">
-    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
-    <nav class="yamm megamenu-horizontal" role="navigation">
-        <ul class="nav">
-			@foreach ($categories as $category)
-            <li class="dropdown menu-item">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>{{ (session()->get('language') == 'english') ? $category->category_name_en : $category->category_name_bn }}</a>
-                 <ul class="dropdown-menu mega-menu">
-					<li class="yamm-content">
-						<div class="row">
-							{{-- @php
-								$subcategories = App\Models\Subcategory::where('category_id', $category->id)->orderBy('subcategory_name_en', 'asc')->get();	
-							@endphp --}}
-							@foreach ($category->subCategories()->get() as $subcategory)
-								<div class="col-sm-12 col-md-3">
-									<h2 class="title">{{ (session('language') == 'english') ? $subcategory->subcategory_name_en : $subcategory->subcategory_name_bn }}</h2>
-									<ul class="links list-unstyled">
-										@foreach ($subcategory->subSubCategories()->get() as $subsubcategory)
-										<li><a href="#">{{ (session('language') == 'english') ? $subsubcategory->subsubcategory_name_en : $subsubcategory->subsubcategory_name_bn }}</a></li>
-										@endforeach
-									</ul>
-								</div><!-- /.col -->
-							@endforeach
-						</div><!-- /.row -->
-					</li><!-- /.yamm-content -->
-				</ul><!-- /.dropdown-menu -->            
-			</li><!-- /.menu-item -->
-			@endforeach
-        </ul><!-- /.nav -->
-    </nav><!-- /.megamenu-horizontal -->
-</div><!-- /.side-menu -->
+			@include('frontend.include.categories');
 <!-- ================================== TOP NAVIGATION : END ================================== -->
 
 	<!-- ============================================== HOT DEALS ============================================== -->
@@ -176,25 +146,9 @@
 
 <!-- ============================================== SPECIAL OFFER : END ============================================== -->
 			<!-- ============================================== PRODUCT TAGS ============================================== -->
-<div class="sidebar-widget product-tag wow fadeInUp">
-	<h3 class="section-title">Product tags</h3>
-	<div class="sidebar-widget-body outer-top-xs">
-		<div class="tag-list">
-			<a class="item" title="Phone" href="category.html">Phone</a>
-			<a class="item active" title="Vest" href="category.html">Vest</a>
-			<a class="item" title="Smartphone" href="category.html">Smartphone</a>
-			<a class="item" title="Furniture" href="category.html">Furniture</a>
-			<a class="item" title="T-shirt" href="category.html">T-shirt</a>
-			<a class="item" title="Sweatpants" href="category.html">Sweatpants</a>
-			<a class="item" title="Sneaker" href="category.html">Sneaker</a>
-			<a class="item" title="Toys" href="category.html">Toys</a>
-			<a class="item" title="Rose" href="category.html">Rose</a>
-		</div><!-- /.tag-list -->
-	</div><!-- /.sidebar-widget-body -->
-</div><!-- /.sidebar-widget -->
+	@include('frontend.include.product_tags')
 <!-- ============================================== PRODUCT TAGS : END ============================================== -->
 			<!-- ============================================== SPECIAL DEALS ============================================== -->
-
 <div class="sidebar-widget outer-bottom-small wow fadeInUp">
 	<h3 class="section-title">{{ (session()->get('language') == 'english') ? 'Special Deals' : 'স্পেসাল ডিল' }}</h3>
 	<div class="sidebar-widget-body outer-top-xs">
@@ -251,29 +205,8 @@
 </div><!-- /.sidebar-widget -->
 <!-- ============================================== NEWSLETTER: END ============================================== -->
 
-			<!-- ============================================== Testimonials============================================== -->
-<div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-	<div id="advertisement" class="advertisement">
-        <div class="item">
-            <div class="avatar"><img src="{{ asset('/') }}fontend/assets/images/testimonials/member1.png" alt="Image"></div>
-		<div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-		<div class="clients_author">John Doe	<span>Abc Company</span>	</div><!-- /.container-fluid -->
-        </div><!-- /.item -->
-
-         <div class="item">
-         	<div class="avatar"><img src="{{ asset('/') }}fontend/assets/images/testimonials/member3.png" alt="Image"></div>
-		<div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-		<div class="clients_author">Stephen Doe	<span>Xperia Designs</span>	</div>
-        </div><!-- /.item -->
-
-        <div class="item">
-            <div class="avatar"><img src="{{ asset('/') }}fontend/assets/images/testimonials/member2.png" alt="Image"></div>
-		<div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-		<div class="clients_author">Saraha Smith	<span>Datsun &amp; Co</span>	</div><!-- /.container-fluid -->
-        </div><!-- /.item -->
-
-    </div><!-- /.owl-carousel -->
-</div>
+<!-- ============================================== Testimonials============================================== -->
+	@include('frontend.include.testimonials')
 
 <!-- ============================================== Testimonials: END ============================================== -->
 
@@ -584,7 +517,122 @@
 		@endforeach	
 	</div><!-- /.home-owl-carousel -->
 </section><!-- /.section -->
+
 <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
+{{-- ===========================Start Skip Brand Product===========================  --}}
+<section class="section featured-product wow fadeInUp">
+	<h3 class="section-title">{{ (session()->get('language') == 'english') ? $brand_skip_0->brand_name_en : $brand_skip_0->brand_name_bn }}</h3>
+	<div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+		@foreach ($brand_products as $product)	
+			<div class="item item-carousel">
+				<div class="products">
+					<div class="product">
+						<div class="product-image">
+							<div class="image">
+								<a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}"><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+							</div><!-- /.image -->
+							<div class="tag hot"><span>hot</span></div>
+						</div><!-- /.product-image -->
+
+						<div class="product-info text-left">
+							<h3 class="name"><a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn }}</a></h3>
+							<div class="rating rateit-small"></div>
+							<div class="description"></div>
+
+							<div class="product-price">
+								<span class="price">TK {{ (session()->get('language') == 'english') ? $product->selling_price : priceBn($product->selling_price) }}</span>
+								<span class="price-before-discount">TK {{ (session()->get('language') == 'english') ? $product->discount_price : priceBn($product->discount_price) }}</span>
+							</div><!-- /.product-price -->
+						</div><!-- /.product-info -->
+						<div class="cart clearfix animate-effect">
+							<div class="action">
+								<ul class="list-unstyled">
+									<li class="add-cart-button btn-group">
+										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+											<i class="fa fa-shopping-cart"></i>
+										</button>
+										<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+									</li>
+
+									<li class="lnk wishlist">
+										<a class="add-to-cart" href="detail.html" title="Wishlist">
+											<i class="icon fa fa-heart"></i>
+										</a>
+									</li>
+
+									<li class="lnk">
+										<a class="add-to-cart" href="detail.html" title="Compare">
+											<i class="fa fa-signal" aria-hidden="true"></i>
+										</a>
+									</li>
+								</ul>
+							</div><!-- /.action -->
+						</div><!-- /.cart -->
+					</div><!-- /.product -->
+				</div><!-- /.products -->
+			</div><!-- /.item -->
+		@endforeach	
+	</div><!-- /.home-owl-carousel -->
+</section><!-- /.section -->
+{{-- ===========================End Skip Brand Product===========================  --}}
+
+{{-- ===========================Start Skip Category Product===========================  --}}
+<section class="section featured-product wow fadeInUp">
+	<h3 class="section-title">{{ (session()->get('language') == 'english') ? $category_skip_0->category_name_en : $category_skip_0->category_name_bn }}</h3>
+	<div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+		@foreach ($category_products as $product)	
+			<div class="item item-carousel">
+				<div class="products">
+					<div class="product">
+						<div class="product-image">
+							<div class="image">
+								<a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}"><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+							</div><!-- /.image -->
+							<div class="tag hot"><span>hot</span></div>
+						</div><!-- /.product-image -->
+
+						<div class="product-info text-left">
+							<h3 class="name"><a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn }}</a></h3>
+							<div class="rating rateit-small"></div>
+							<div class="description"></div>
+
+							<div class="product-price">
+								<span class="price">TK {{ (session()->get('language') == 'english') ? $product->selling_price : priceBn($product->selling_price) }}</span>
+								<span class="price-before-discount">TK {{ (session()->get('language') == 'english') ? $product->discount_price : priceBn($product->discount_price) }}</span>
+							</div><!-- /.product-price -->
+						</div><!-- /.product-info -->
+						<div class="cart clearfix animate-effect">
+							<div class="action">
+								<ul class="list-unstyled">
+									<li class="add-cart-button btn-group">
+										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+											<i class="fa fa-shopping-cart"></i>
+										</button>
+										<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+									</li>
+
+									<li class="lnk wishlist">
+										<a class="add-to-cart" href="detail.html" title="Wishlist">
+											<i class="icon fa fa-heart"></i>
+										</a>
+									</li>
+
+									<li class="lnk">
+										<a class="add-to-cart" href="detail.html" title="Compare">
+											<i class="fa fa-signal" aria-hidden="true"></i>
+										</a>
+									</li>
+								</ul>
+							</div><!-- /.action -->
+						</div><!-- /.cart -->
+					</div><!-- /.product -->
+				</div><!-- /.products -->
+			</div><!-- /.item -->
+		@endforeach	
+	</div><!-- /.home-owl-carousel -->
+</section><!-- /.section -->
+{{-- ===========================End Skip Category Product===========================  --}}
+
 			<!-- ============================================== WIDE PRODUCTS ============================================== -->
 <div class="wide-banners wow fadeInUp outer-bottom-xs">
 	<div class="row">

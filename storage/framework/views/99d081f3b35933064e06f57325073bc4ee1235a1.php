@@ -75,10 +75,10 @@
                         <li class="dropdown dropdown-small">
                             <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value"><?php echo e((session()->get('language') == 'english') ? 'English' : 'ভাষা পরিবর্তন'); ?> </span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <?php if(session()->get('language') == 'bangla'): ?>
-                                    <li><a href="<?php echo e(route('english-language')); ?>">English</a></li>
-                                    <?php else: ?>
+                                <?php if(session()->get('language') == 'english'): ?>
                                     <li><a href="<?php echo e(route('bangla-language')); ?>">বাংলা</a></li>
+                                    <?php else: ?>
+                                    <li><a href="<?php echo e(route('english-language')); ?>">English</a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>

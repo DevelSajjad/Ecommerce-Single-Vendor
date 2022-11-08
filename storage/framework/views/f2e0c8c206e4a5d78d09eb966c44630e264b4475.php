@@ -18,9 +18,9 @@
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Clothing</a></li>
-				<li class='active'>Floral Print Buttoned</li>
+				<li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+				<li><a href="#"><?php echo e($products->categories()->first()->category_name_en); ?></a></li>
+				<li class='active'><?php echo e($products->product_name_en); ?></li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -777,73 +777,7 @@
 			<div class="clearfix"></div>
 		</div><!-- /.row -->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<div id="brands-carousel" class="logo-slider wow fadeInUp">
 
-		<div class="logo-slider-inner">	
-			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-				<div class="item m-t-15">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand1.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item m-t-10">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand2.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand3.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand4.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand5.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand6.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand2.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand4.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand1.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="<?php echo e(asset('/')); ?>fontend/assets/images/brands/brand5.png" src="<?php echo e(asset('/')); ?>fontend/assets/images/blank.gif" alt="">
-					</a>	
-				</div><!--/.item-->
-		    </div><!-- /.owl-carousel #logo-slider -->
-		</div><!-- /.logo-slider-inner -->
-	
-</div><!-- /.logo-slider -->
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
 
