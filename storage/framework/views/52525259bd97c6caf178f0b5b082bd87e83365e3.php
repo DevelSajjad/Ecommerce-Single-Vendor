@@ -19,87 +19,8 @@
 			<?php echo $__env->make('frontend.include.categories', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>;
 <!-- ================================== TOP NAVIGATION : END ================================== -->
 
-	<!-- ============================================== HOT DEALS ============================================== -->
-<div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-	<h3 class="section-title">hot deals</h3>
-	<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
-		<?php $__empty_1 = true; $__currentLoopData = $hotDeals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-			<div class="item">
-				<div class="products">
-					<div class="hot-deal-wrapper">
-						<div class="image">
-							<img src="<?php echo e(asset($product->product_thumbnail)); ?>" alt="">
-						</div>
-						<?php
-							$amount = $product->selling_price - $product->discount_price;
-							$discount = ($amount/$product->selling_price) * 100;
-							$discount_percent = round(100 - $discount,2);
-						?>
-						<div class="sale-offer-tag"><span><?php echo e((session()->get('language') == 'english') ? $discount_percent : priceBn($discount_percent)); ?>%<br>off</span></div>
-						<div class="timing-wrapper">
-							<div class="box-wrapper">
-								<div class="date box">
-									<span class="key">120</span>
-									<span class="value">DAYS</span>
-								</div>
-							</div>
-
-							<div class="box-wrapper">
-								<div class="hour box">
-									<span class="key">20</span>
-									<span class="value">HRS</span>
-								</div>
-							</div>
-
-							<div class="box-wrapper">
-								<div class="minutes box">
-									<span class="key">36</span>
-									<span class="value">MINS</span>
-								</div>
-							</div>
-
-							<div class="box-wrapper hidden-md">
-								<div class="seconds box">
-									<span class="key">60</span>
-									<span class="value">SEC</span>
-								</div>
-							</div>
-						</div>
-					</div><!-- /.hot-deal-wrapper -->
-
-					<div class="product-info text-left m-t-20">
-						<h3 class="name"><a href="<?php echo e(url('single-product-detail',$product->id.'/'.$product->product_slug_en)); ?>"><?php echo e((session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn); ?><?php echo e((session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn); ?></a></h3>
-						<div class="rating rateit-small"></div>
-
-						<div class="product-price">
-							<span class="price">
-								TK <?php echo e((session()->get('language') == 'english') ? $product->selling_price : priceBn($product->selling_price)); ?>
-
-							</span>
-
-							<span class="price-before-discount">TK <?php echo e((session()->get('language') == 'english') ? $product->discount_price : priceBn($product->discount_price)); ?></span>
-
-						</div><!-- /.product-price -->
-
-					</div><!-- /.product-info -->
-
-					<div class="cart clearfix animate-effect">
-						<div class="action">
-							<div class="add-cart-button btn-group">
-								<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-									<i class="fa fa-shopping-cart"></i>
-								</button>
-								<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-							</div>
-						</div><!-- /.action -->
-					</div><!-- /.cart -->
-				</div>
-			</div>
-		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-			<h1 class="text-danger"><b>No Hot Deals</b></h1>
-		<?php endif; ?>
-    </div><!-- /.sidebar-widget -->
-</div>
+<!-- ============================================== HOT DEALS ============================================== -->
+			<?php echo $__env->make('frontend.include.hot_deals', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- ============================================== HOT DEALS: END ============================================== -->
 
 

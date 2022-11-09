@@ -31,10 +31,15 @@ class IndexController extends Controller
         // dd($data['specialOffer']);
         return view('frontend.index', $data );
     }
-    public function productDetail($id,$slug)
+    public function productDetail($product_id,$slug)
     {
-        $data['products'] = Product::findOrFail($id);
-        $data['multiImg'] = MultiImg::where('product_id', $id)->latest()->get();
+        $data['products'] = Product::findOrFail($product_id);
+        $data['multiImg'] = MultiImg::where('product_id', $product_id)->latest()->get();
+        $data['size_en'] = explode(',' , $data['products']->product_size_en);
+        $data['size_bn'] = explode(',' , $data['products']->product_size_bn);
+        $data['color_en'] = explode(',' , $data['products']->product_color_en);
+        $data['color_bn'] = explode(',' , $data['products']->product_color_bn);
+        $data['related_products'] = Product::where('status', 1)->where('category_id', $data['products']->category_id)->orderBy('id', 'desc')->get();
         return view('frontend.product_detail', $data);
     }
     public function tagWiseProduct($tag)
@@ -42,5 +47,17 @@ class IndexController extends Controller
         $data['tagWiseProduct'] = Product::where('status', 1)->where('product_tags_en', $tag)->orWhere('product_tags_bn', $tag)->orderBy('id', 'desc')->get();
         $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
         return view('frontend.tag_wise_product', $data);
+    }
+    public function subCategoryWiseProduct($id, $slug)
+    {
+        $data['catgoryWiseProduct'] = Product::where('status', 1)->where('subcategory_id', $id)->orderBy('id', 'desc')->get();
+        $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
+        return view('frontend.cat_wise_product', $data);
+    }
+    public function subSubCategoryWiseProduct($id, $slug)
+    {
+        $data['subsubcatgoryWiseProduct'] = Product::where('status', 1)->where('subsubcategory_id', $id)->orderBy('id', 'desc')->get();
+        $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
+        return view('frontend.subsubcat_wise_product', $data);
     }
 }

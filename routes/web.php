@@ -105,3 +105,7 @@ Route::get('/bangla-language', [LanguageController::class, 'banglaLanguage'])->n
 Route::get('/single-product-detail/{id}/{slug}',[IndexController::class, 'productDetail']);
 // ===================Tag Wise Product=====================
 Route::get('/tag/wise/product/{tag}', [IndexController::class, 'tagWiseProduct']);
+//====================Subcategory Wise Product=====================
+Route::get('/subcategory/product/{id}/{slug}', [IndexController::class, 'subCategoryWiseProduct']);
+//====================Subsubcategory Wise Product=====================
+Route::get('/subsubcategory/product/{id}/{slug}', [IndexController::class, 'subSubCategoryWiseProduct']);
