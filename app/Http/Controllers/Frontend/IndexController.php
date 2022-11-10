@@ -36,6 +36,7 @@ class IndexController extends Controller
         $data['products'] = Product::findOrFail($product_id);
         $data['multiImg'] = MultiImg::where('product_id', $product_id)->latest()->get();
         $data['size_en'] = explode(',' , $data['products']->product_size_en);
+        
         $data['size_bn'] = explode(',' , $data['products']->product_size_bn);
         $data['color_en'] = explode(',' , $data['products']->product_color_en);
         $data['color_bn'] = explode(',' , $data['products']->product_color_bn);
@@ -59,5 +60,14 @@ class IndexController extends Controller
         $data['subsubcatgoryWiseProduct'] = Product::where('status', 1)->where('subsubcategory_id', $id)->orderBy('id', 'desc')->get();
         $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
         return view('frontend.subsubcat_wise_product', $data);
+    }
+    public function productViewAjax($product_id)
+    {
+        $data['products'] = Product::with('categories', 'brand')->findOrFail($product_id);
+        $data['size_en'] = explode(',' , $data['products']->product_size_en);
+        $data['size_bn'] = explode(',' , $data['products']->product_size_bn);
+        $data['color_en'] = explode(',' , $data['products']->product_color_en);
+        $data['color_bn'] = explode(',' , $data['products']->product_color_bn);
+        return response()->json($data);
     }
 }

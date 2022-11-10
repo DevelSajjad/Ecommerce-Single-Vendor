@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\UserController;
@@ -109,3 +110,7 @@ Route::get('/tag/wise/product/{tag}', [IndexController::class, 'tagWiseProduct']
 Route::get('/subcategory/product/{id}/{slug}', [IndexController::class, 'subCategoryWiseProduct']);
 //====================Subsubcategory Wise Product=====================
 Route::get('/subsubcategory/product/{id}/{slug}', [IndexController::class, 'subSubCategoryWiseProduct']);
+Route::get('/product/view/model/{id}', [IndexController::class, 'productViewAjax']);
+Route::post('/add/cart/data/{id}', [CartController::class, 'addCartData']);
+
+

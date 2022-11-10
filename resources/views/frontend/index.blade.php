@@ -398,7 +398,7 @@
 							</div><!-- /.image -->
 							<div class="tag hot"><span>hot</span></div>
 						</div><!-- /.product-image -->
-
+						
 						<div class="product-info text-left">
 							<h3 class="name"><a href="{{ url('single-product-detail',$featured->id.'/'.$featured->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $featured->product_name_en : $featured->product_name_bn }}</a></h3>
 							<div class="rating rateit-small"></div>
@@ -413,7 +413,7 @@
 							<div class="action">
 								<ul class="list-unstyled">
 									<li class="add-cart-button btn-group">
-										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+										<button class="btn btn-primary icon" id="{{ $featured->id }}" onclick="productView(this.id)" type="button" data-toggle="modal" data-target="#cartModal">
 											<i class="fa fa-shopping-cart"></i>
 										</button>
 										<button class="btn btn-primary cart-btn" type="button">Add to cart</button>

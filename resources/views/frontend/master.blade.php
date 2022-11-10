@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
 
@@ -346,7 +347,64 @@
 	</div><!-- /.container -->
 </div><!-- /#top-banner-and-menu -->
 
+{{-- ==================================Cart Modal============================ --}}
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="pname"></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" id="pimg" src="" alt="Card image cap" height="200px">
+                    </div>
+                </div>
 
+                <div class="col-md-4">
+                    <ul class="list-group">
+                        <li class="list-group-item text-warning active">Product Info</li>
+                        <li class="list-group-item"><b>Price: </b><span id="price"> </span> <del class="text-light" id="pdiscount"></del> </li>
+                        <li class="list-group-item"><b>Product Code: </b><span id="pcode">  </span></li>
+                        <li class="list-group-item"><b>Category Name: </b><span id="pcatname"> </span></li>
+                        <li class="list-group-item"><b>Brand: </b><span id="pbrand"> </span></li>
+                        <li class="list-group-item"><b>Stock: </b><span id="pstock">  </span></li>
+                      </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group" id="product_size_hide">
+                        <label for="exampleFormControlSelect1">Choose Size</label>
+                        <select class="form-control" id="product_size">
+                         
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Choose Color</label>
+                        <select class="form-control" id="product_color">
+                          
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Quantity</label>
+                        <input type="number" class="form-control" id="qty" value="1" min="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+           <input type="hidden" id="product_id">
+          <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" onclick="addCart()">Add Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{-- ==================================Cart Modal End============================ --}}
 
 
 <!-- ============================================================= FOOTER ============================================================= -->
@@ -505,63 +563,142 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script>
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-  @if(Session::has('message'))
-//   toastr.options =
-//   {
-//   	"closeButton" : true,
-//   	"progressBar" : true
-//   }
-  		toastr.success("{{ session('message') }}");
-  @endif
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        @if(Session::has('message'))
+        //   toastr.options =
+        //   {
+        //   	"closeButton" : true,
+        //   	"progressBar" : true
+        //   }
+                toastr.success("{{ session('message') }}");
+        @endif
 
-  @if(Session::has('error'))
-//   toastr.options =
-//   {
-//   	"closeButton" : true,
-//   	"progressBar" : true
-//   }
-  		toastr.error("{{ session('error') }}");
-  @endif
+        @if(Session::has('error'))
+        //   toastr.options =
+        //   {
+        //   	"closeButton" : true,
+        //   	"progressBar" : true
+        //   }
+                toastr.error("{{ session('error') }}");
+        @endif
 
-  @if(Session::has('info'))
-//   toastr.options =
-//   {
-//   	"closeButton" : true,
-//   	"progressBar" : true
-//   }
-  		toastr.info("{{ session('info') }}");
-  @endif
+        @if(Session::has('info'))
+        //   toastr.options =
+        //   {
+        //   	"closeButton" : true,
+        //   	"progressBar" : true
+        //   }
+                toastr.info("{{ session('info') }}");
+        @endif
 
-  @if(Session::has('warning'))
-//   toastr.options =
-//   {
-//   	"closeButton" : true,
-//   	"progressBar" : true
-//   }
-
-
-  		toastr.warning("{{ session('warning') }}");
-  @endif
-</script>
+        @if(Session::has('warning'))
+        //   toastr.options =
+        //   {
+        //   	"closeButton" : true,
+        //   	"progressBar" : true
+        //   }
 
 
+                toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
+    {{-- ===========Modal Start=============== --}}
+    <script type="text/javascript">
+            ///View Modal
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function productView(id)
+        {
+            $.ajax({
+                type: 'GET',
+                url:   'product/view/model/'+id,
+                datatype: 'json',
+                success: function(data){
+                    if($("#pname").text(data.products.product_name_en)) {
+                        $("#pname").text();
+                    }else{
+                        $("#pname").append(data.products.product_name_en);
+                    }            
+                    $("#pimg").attr('src', '/'+data.products.product_thumbnail);
+                    $("#price").text(data.products.selling_price - data.products.discount_price);
+                    $("#pdiscount").text(data.products.discount_price);
+                    $("#pcode").text(data.products.product_code);
+                    $("#pcatname").text(data.products.categories.category_name_en);
+                    $("#pbrand").text(data.products.brand.brand_name_en);
+                    $("#product_id").val(id);
+                    $("#qty").val(1);
+                    //size
+                    if(data.size_en == '') {
+                        $("#product_size_hide").hide();
+                    }else {
+                        $("#product_size_hide").show();
+                        $("#product_size").empty();
+                        $.each(data.size_en, function(key, value){
+                        $("#product_size").append('<option value="'+value+'"> '+value+' </option>')
+                    })
+
+                    }
+                    //Color
+                    $("#product_color").empty();
+                    $.each(data.color_en, function(key, value){
+                        $("#product_color").append('<option value="'+value+'">'+value+'</option>')
+                    })
+
+                    if(data.products.product_qty > 0) {
+                        $("#pstock").css('background-color', 'green').addClass('badge badge-pill badge-success').text('Avilable');
+                        $("#pstock").css().addClass();
+                    }else{
+                        $("#pstock").css('background-color', 'red').addClass('badge badge-pill badge-danger').text('Out Of Stock');
+                    }
+                    
+                }
+            });
+        }
+        ///View End Modal
+
+        // Add Cart with Modal
+            function addCart()
+            {
+                var product_id = $("#product_id").val();
+                var product_name = $("#pname").text();
+                var product_size = $("#product_size option:selected").text();
+                var product_color = $("#product_color option:selected").text();
+                var quantity      =  $("#qty").val();
+                $.ajax({
+                    type: "POST",
+                    url: "add/cart/data/"+product_id,
+                    datatype: "json",
+                    data: {
+                        product_name:product_name, size:product_size, color: product_color, quantity:quantity
+                    },
+                    success:function(data) {
+                        $("#closeModal").click();
+                        console.log(data);
+                    }
+                });
+            }
+        //End Add Cart with Modal
+    </script>
+{{-- =====================Modal End===================== --}}
 </body>
 
 </html>
