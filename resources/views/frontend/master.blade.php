@@ -136,60 +136,37 @@
 </div><!-- /.search-area -->
 <!-- ============================================================= SEARCH AREA : END ============================================================= -->				</div><!-- /.top-search-holder -->
 
-				<div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
-					<!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
-
+<div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
+<!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 	<div class="dropdown dropdown-cart">
 		<a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
 			<div class="items-cart-inner">
-            <div class="basket">
-					<i class="glyphicon glyphicon-shopping-cart"></i>
-				</div>
-				<div class="basket-item-count"><span class="count">2</span></div>
-				<div class="total-price-basket">
-					<span class="lbl">cart -</span>
-					<span class="total-price">
-						<span class="sign">$</span><span class="value">600.00</span>
-					</span>
-				</div>
-
-
+                <div class="basket">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                </div>
+				<div class="basket-item-count"><span id="cartQty" class="count"></span></div>
+                    <div class="total-price-basket">
+                        <span class="lbl">cart -</span>
+                        <span class="total-price">
+                            <span class="sign">TK </span><span id="subTotal" class="value"></span>
+                        </span>
+                    </div>
 		    </div>
 		</a>
 		<ul class="dropdown-menu">
 			<li>
-				<div class="cart-item product-summary">
-					<div class="row">
-						<div class="col-xs-4">
-							<div class="image">
-								<a href="detail.html"><img src="{{ asset('/') }}fontend/assets/images/cart.jpg" alt=""></a>
-							</div>
-						</div>
-						<div class="col-xs-7">
+                <div id="miniCart">
 
-							<h3 class="name"><a href="index8a95.html?page-detail">Simple Product</a></h3>
-							<div class="price">$600.00</div>
-						</div>
-						<div class="col-xs-1 action">
-							<a href="#"><i class="fa fa-trash"></i></a>
-						</div>
-					</div>
-				</div><!-- /.cart-item -->
+                </div>
 				<div class="clearfix"></div>
 			<hr>
-
 			<div class="clearfix cart-total">
 				<div class="pull-right">
-
-						<span class="text">Sub Total :</span><span class='price'>$600.00</span>
-
+						<span class="text">Sub Total :</span><span id="subTotal" class='price'></span>
 				</div>
 				<div class="clearfix"></div>
-
 				<a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
 			</div><!-- /.cart-total-->
-
-
 		</li>
 		</ul><!-- /.dropdown-menu-->
 	</div><!-- /.dropdown-cart -->
@@ -560,6 +537,7 @@
     <script src="{{ asset('/') }}fontend/assets/js/bootstrap-select.min.js"></script>
     <script src="{{ asset('/') }}fontend/assets/js/wow.min.js"></script>
 	<script src="{{ asset('/') }}fontend/assets/js/scripts.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script>
@@ -630,14 +608,14 @@
         {
             $.ajax({
                 type: 'GET',
-                url:   'product/view/model/'+id,
+                url:   '/product/view/model/'+id,
                 datatype: 'json',
                 success: function(data){
                     if($("#pname").text(data.products.product_name_en)) {
                         $("#pname").text();
                     }else{
                         $("#pname").append(data.products.product_name_en);
-                    }            
+                    }    
                     $("#pimg").attr('src', '/'+data.products.product_thumbnail);
                     $("#price").text(data.products.selling_price - data.products.discount_price);
                     $("#pdiscount").text(data.products.discount_price);
@@ -646,6 +624,11 @@
                     $("#pbrand").text(data.products.brand.brand_name_en);
                     $("#product_id").val(id);
                     $("#qty").val(1);
+                    if(data.products.product_qty > 0) {
+                        $("#pstock").css('background-color', 'green').addClass('badge badge-pill badge-success').text('Avilable');
+                    }else{
+                        $("#pstock").css('background-color', 'red').addClass('badge badge-pill badge-danger').text('Out Of Stock');
+                    }
                     //size
                     if(data.size_en == '') {
                         $("#product_size_hide").hide();
@@ -655,26 +638,16 @@
                         $.each(data.size_en, function(key, value){
                         $("#product_size").append('<option value="'+value+'"> '+value+' </option>')
                     })
-
                     }
                     //Color
                     $("#product_color").empty();
                     $.each(data.color_en, function(key, value){
                         $("#product_color").append('<option value="'+value+'">'+value+'</option>')
                     })
-
-                    if(data.products.product_qty > 0) {
-                        $("#pstock").css('background-color', 'green').addClass('badge badge-pill badge-success').text('Avilable');
-                        $("#pstock").css().addClass();
-                    }else{
-                        $("#pstock").css('background-color', 'red').addClass('badge badge-pill badge-danger').text('Out Of Stock');
-                    }
-                    
                 }
             });
         }
-        ///View End Modal
-
+        
         // Add Cart with Modal
             function addCart()
             {
@@ -685,18 +658,102 @@
                 var quantity      =  $("#qty").val();
                 $.ajax({
                     type: "POST",
-                    url: "add/cart/data/"+product_id,
+                    url: "/add/cart/data/"+product_id,
                     datatype: "json",
                     data: {
                         product_name:product_name, size:product_size, color: product_color, quantity:quantity
                     },
                     success:function(data) {
+                        miniCart();
                         $("#closeModal").click();
-                        console.log(data);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        })
+
+                           if($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
+                            })
+                           }else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                           }
                     }
                 });
             }
         //End Add Cart with Modal
+    </script>
+
+    <script>
+        function miniCart()
+        {
+            $.ajax({
+                type: "GET",
+                datatype: "json",
+                url: "/cart/view/data",
+                success: function(data){
+                    $('span[id="subTotal"]').text(data.cartTotal);
+                    $("#cartQty").text(data.cartQty);
+                    var miniCart = "";
+                    $.each(data.carts, function(key, value) {
+                        miniCart += ` 
+                        <div class="cart-item product-summary">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="image">
+                                        <a href="detail.html"><img src="/${value.options.image}" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <h3 class="name"><a href="index8a95.html?page-detail">${value.name}</a></h3>
+                                    <div class="price">TK ${value.price}</div>
+                                </div>
+                                <div class="col-xs-1 action">
+                                    <button type="submit" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div><!-- /.cart-item --> `
+                    })
+                    $("#miniCart").html(miniCart);
+                }
+            });
+        }
+        miniCart();
+        function cartRemove(rowId)
+        {
+            $.ajax({
+                type: "GET",
+                datatype: "json",
+                url: "/cart/remove/"+rowId,
+                success: function(data) {
+                    miniCart();
+                    const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        })
+
+                           if($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
+                            })
+                           }else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                           }
+                }
+            })
+        }
     </script>
 {{-- =====================Modal End===================== --}}
 </body>

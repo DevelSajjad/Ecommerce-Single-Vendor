@@ -112,5 +112,6 @@ Route::get('/subcategory/product/{id}/{slug}', [IndexController::class, 'subCate
 Route::get('/subsubcategory/product/{id}/{slug}', [IndexController::class, 'subSubCategoryWiseProduct']);
 Route::get('/product/view/model/{id}', [IndexController::class, 'productViewAjax']);
 Route::post('/add/cart/data/{id}', [CartController::class, 'addCartData']);
-
+Route::get('/cart/view/data', [CartController::class, 'viewCart']);
+Route::get('/cart/remove/{rowId}', [CartController::class, 'removeCart']);
 

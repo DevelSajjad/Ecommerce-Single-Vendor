@@ -92,7 +92,7 @@
                     </div><!-- /.gallery-holder -->        			
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
-							<h1 class="name"><?php echo e((session()->get('language') == 'english') ? $products->product_name_en : $products->product_name_bn); ?></h1>
+							<h1 id="pname" class="name"><?php echo e((session()->get('language') == 'english') ? $products->product_name_en : $products->product_name_bn); ?></h1>
 							<div class="rating-reviews m-t-20">
 								<div class="row">
 									<div class="col-sm-3">
@@ -154,8 +154,8 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="exampleFormControlSelect1">Choose Size</label>
-											<select class="form-control" id="exampleFormControlSelect1">
+											<label for="product_size">Choose Size</label>
+											<select class="form-control" id="product_size">
 												<?php if((session()->get('language') == 'english')): ?>
 													<?php $__currentLoopData = $size_en; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 														<option value="<?php echo e($size); ?>"> <?php echo e(ucwords($size)); ?> </option>
@@ -171,8 +171,8 @@
 
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="exampleFormControlSelect1">Choose Color</label>
-											<select class="form-control" id="exampleFormControlSelect1">
+											<label for="product_color">Choose Color</label>
+											<select class="form-control" id="product_color">
 												<?php if((session()->get('language') == 'english')): ?>
 													<?php $__currentLoopData = $color_en; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $color): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 														<option value="<?php echo e($color); ?>"> <?php echo e(ucwords($color)); ?> </option>
@@ -203,13 +203,13 @@
 								                  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
 								                  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
 								                </div>
-								                <input type="text" value="1">
+								                <input type="text" id="qty" value="1" min="1">
 							              </div>
 							            </div>
 									</div>
-
+										<input type="hidden" name="" id="product_id" value="<?php echo e($products->id); ?>">
 									<div class="col-sm-7">
-										<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+										<button type="submit" onclick="addCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
 									</div>
 								</div><!-- /.row -->
 							</div><!-- /.quantity-container -->
