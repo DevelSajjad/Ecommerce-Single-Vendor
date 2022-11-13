@@ -46,7 +46,7 @@
                 <div class="cnt-account">
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>{{ (session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল' }}</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>{{ (session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা' }}</a></li>
+                        <li><a href="{{ url('/user/wishlist/view') }}"><i class="icon fa fa-heart"></i>{{ (session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা' }}</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>{{ (session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট' }}</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>{{ (session()->get('language') == 'english') ? 'Checkout' : 'চেকআউট' }}</a></li>
                         @auth
@@ -707,11 +707,11 @@
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="image">
-                                        <a href="detail.html"><img src="/${value.options.image}" alt=""></a>
+                                        <a href="/single-product-detail/${value.id}/${value.options.slug}"><img src="/${value.options.image}" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-xs-7">
-                                    <h3 class="name"><a href="index8a95.html?page-detail">${value.name}</a></h3>
+                                    <h3 class="name"><a href="/single-product-detail/${value.id}/${value.options.slug}">${value.name}</a></h3>
                                     <div class="price">TK ${value.price}</div>
                                 </div>
                                 <div class="col-xs-1 action">
@@ -756,6 +756,8 @@
         }
     </script>
 {{-- =====================Modal End===================== --}}
+    @yield('js')
+
 </body>
 
 </html>

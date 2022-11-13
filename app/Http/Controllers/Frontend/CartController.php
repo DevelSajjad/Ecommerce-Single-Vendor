@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Wishlist;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 class CartController extends Controller
@@ -18,9 +20,10 @@ class CartController extends Controller
              'price' => $product->selling_price, 
              'weight' => 1, 
              'options' => [
-                'size' => $request->size,
+                 'size' => $request->size,
                 'color' => $request->color,
-                'image' => $product->product_thumbnail
+                'image' => $product->product_thumbnail,
+                'slug' => $product->product_slug_en, 
                 ],
              
         ]);
@@ -41,5 +44,22 @@ class CartController extends Controller
     {
         Cart::remove($rowId);
         return response()->json(['success' => 'Cart Remove Successful']);
+    }
+
+    public function addWishlist(Request $request, $product_id)
+    { 
+        if (!auth()->check()) {
+            return response()->json(['error'=> 'At First Login']); 
+        }
+        $wishlist = Wishlist::where('user_id', auth()->user()->id)->where('product_id', $product_id);
+        if (!$wishlist->exists()) {
+            Wishlist::insert([
+                'user_id' => auth()->user()->id,
+                'product_id' => $product_id,
+                'created_at' => Carbon::now(),
+            ]);
+            return response()->json(['success' => 'Add Successful in Wishlist']);
+        } 
+            return response()->json(['error' => 'Already Product in Wishlist']);
     }
 }

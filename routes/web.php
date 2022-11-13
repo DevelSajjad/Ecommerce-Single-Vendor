@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,6 +97,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/update-profile-image',[UserController::class,'updateImage'])->name('update-profile-image');
     Route::get('/update-password',[UserController::class,'updatePasswordPage'])->name('update-password');
     Route::post('change-password',[UserController::class,'changePassword'])->name('change-password');
+    // ===========Wishlist===========
+    Route::get('/wishlist/view', [WishlistController::class, 'wishlistView']);
+    Route::get('/wishlist/data', [WishlistController::class, 'wishlistData']);
 
 });
 
@@ -114,4 +118,7 @@ Route::get('/product/view/model/{id}', [IndexController::class, 'productViewAjax
 Route::post('/add/cart/data/{id}', [CartController::class, 'addCartData']);
 Route::get('/cart/view/data', [CartController::class, 'viewCart']);
 Route::get('/cart/remove/{rowId}', [CartController::class, 'removeCart']);
+// =====Wishlist=======
+Route::post('add/wishlist/{id}', [CartController::class, 'addWishlist']);
+
 
