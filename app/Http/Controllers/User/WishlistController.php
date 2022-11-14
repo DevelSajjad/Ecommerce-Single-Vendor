@@ -22,4 +22,10 @@ class WishlistController extends Controller
         $wishlist = Wishlist::with('product')->where('user_id', auth()->user()->id)->latest()->get();
         return response()->json($wishlist);
     }
+    
+    public function wishlistRemove($wishlist_id)
+    {
+        $wishlist = Wishlist::where('user_id', auth()->user()->id)->where('id', $wishlist_id)->delete();
+        return response()->json(['success' => "Wishlist Remove Successful"]);
+    }
 }

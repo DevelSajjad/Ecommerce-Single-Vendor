@@ -425,7 +425,7 @@
 							<div class="action">
 								<ul class="list-unstyled">
 									<li class="add-cart-button btn-group">
-										<button class="btn btn-primary icon" id="{{ $featured->id }}" onclick="productView(this.id)" type="button" data-toggle="modal" data-target="#cartModal">
+										<button class="btn btn-primary icon" id="{{ $featured->id }}" onclick="productView(this.id)" type="button" data-toggle="modal" data-target="#cartModal"data-toggle="modal" data-target="#cartModal">
 											<i class="fa fa-shopping-cart"></i>
 										</button>
 										<button class="btn btn-primary cart-btn" type="button">Add to cart</button>

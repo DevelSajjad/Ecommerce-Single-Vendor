@@ -100,15 +100,18 @@
                                             <span class="review">( 06 Reviews )</span>
                                         </div>
                                         <div class="price">
-                                            $400.00
-                                            <span>$900.00</span>
+                                            ${value.product.discount_price == null
+                                               ? `TK ${value.product.selling_price}`
+                                               : `TK ${value.product.selling_price} <span>TK ${value.product.discount_price}</span>`
+                                            }
+                                            
                                         </div>
                                     </td>
                                     <td class="col-md-2">
-                                        <a href="#" class="btn-upper btn btn-primary">Add to cart</a>
+                                        <button href="#" class="btn-upper btn btn-primary" type="button" id="${value.product_id}" onclick="productView(this.id)" data-toggle="modal" data-target="#cartModal">Add to cart</button>
                                     </td>
                                     <td class="col-md-1 close-btn">
-                                        <a href="#" class=""><i class="fa fa-times"></i></a>
+                                        <button type="button" id="${value.id}" onclick="wishlistRemove(this.id)" class="btn btn-danger"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>`
             })
@@ -117,6 +120,36 @@
     })
    }
    wishlistView();
+
+   function wishlistRemove(wishlist_id)
+   {
+    $.ajax({
+        type: "GET",
+        datatype: "json",
+        url: "{{ url('/user/wishlist/remove/') }}/" + wishlist_id,
+        success: function(data) {
+            wishlistView();
+            const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        })
+
+                           if($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
+                            })
+                           }else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                           }
+        }
+    })
+   }
 </script>
 {{-- =====================Wishlist End===================== --}}
 @endsection

@@ -100,6 +100,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     // ===========Wishlist===========
     Route::get('/wishlist/view', [WishlistController::class, 'wishlistView']);
     Route::get('/wishlist/data', [WishlistController::class, 'wishlistData']);
+    Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'wishlistRemove']);
 
 });
 
