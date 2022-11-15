@@ -47,7 +47,7 @@
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i><?php echo e((session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল'); ?></a></li>
                         <li><a href="<?php echo e(url('/user/wishlist/view')); ?>"><i class="icon fa fa-heart"></i><?php echo e((session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা'); ?></a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i><?php echo e((session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট'); ?></a></li>
+                        <li><a href="<?php echo e(route('cart-list')); ?>"><i class="icon fa fa-shopping-cart"></i><?php echo e((session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট'); ?></a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i><?php echo e((session()->get('language') == 'english') ? 'Checkout' : 'চেকআউট'); ?></a></li>
                         <?php if(auth()->guard()->check()): ?>
                             <li><a href="<?php echo e(route('user.dashboard')); ?>"><i class="icon fa fa-check"></i><?php echo e((session()->get('language') == 'english') ? 'Profile' : 'প্রোফাইল'); ?></a></li>
@@ -698,6 +698,7 @@
                 datatype: "json",
                 url: "/cart/view/data",
                 success: function(data){
+                
                     $('span[id="subTotal"]').text(data.cartTotal);
                     $("#cartQty").text(data.cartQty);
                     var miniCart = "";
@@ -755,6 +756,7 @@
             })
         }
     </script>
+
 
     <?php echo $__env->yieldContent('js'); ?>
 

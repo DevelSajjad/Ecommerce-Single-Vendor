@@ -119,7 +119,12 @@ Route::get('/product/view/model/{id}', [IndexController::class, 'productViewAjax
 Route::post('/add/cart/data/{id}', [CartController::class, 'addCartData']);
 Route::get('/cart/view/data', [CartController::class, 'viewCart']);
 Route::get('/cart/remove/{rowId}', [CartController::class, 'removeCart']);
+Route::get('/cart/list/page', [CartController::class, 'cartListView'])->name('cart-list');
+Route::get('/cart/list/view', [CartController::class, 'cartListData']);
+Route::get('/cart/quantity/increment/{rowId}', [CartController::class, 'cartQuantityIncrement']);
+Route::get('/cart/quantity/decrement/{rowId}', [CartController::class, 'cartQuantityDecrement']);
 // =====Wishlist=======
 Route::post('add/wishlist/{id}', [CartController::class, 'addWishlist']);
+
 
 
