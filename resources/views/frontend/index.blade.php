@@ -9,6 +9,7 @@
 			return $bnPrice;
 		}	
 	@endphp
+	<a href="http://multivendor.homemaintaining.com">Click</a>
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
 	<div class="container">
 	<div class="row">

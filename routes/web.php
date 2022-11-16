@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\BrandController;
@@ -86,6 +87,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/delete-slide/{id}',[SlideController::class,'slideDelete']);
     Route::get('/slide-status-inactive/{id}',[SlideController::class,'statusInactive']);
     Route::get('/slide-status-active/{id}',[SlideController::class,'statusActive']);
+    //////////////////////Coupon//////////////////////
+    Route::get('/coupon', [CouponController::class, 'couponPage'])->name('coupon');
+    Route::post('/add/coupon', [CouponController::class, 'addCoupon'])->name('add-coupon');
+    Route::any('/edit-coupon/{couponId?}', [CouponController::class, 'editCoupon'])->name('update-coupon');
 
 });
 
