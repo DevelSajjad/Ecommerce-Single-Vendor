@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\CartController;
@@ -91,7 +92,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/coupon', [CouponController::class, 'couponPage'])->name('coupon');
     Route::post('/add/coupon', [CouponController::class, 'addCoupon'])->name('add-coupon');
     Route::any('/edit-coupon/{couponId?}', [CouponController::class, 'editCoupon'])->name('update-coupon');
-
+    Route::get('/delete/coupon/{couponId?}', [CouponController::class, 'deleteCoupon']);
+    ///////////////////Admin Ship Area//////////////////////
+    Route::get('/division_page', [ShipareaController::class, 'divisionPage'])->name('add-division-page');
+    Route::post('/add_division', [ShipareaController::class, 'addDivision'])->name('add-division');
+    Route::get('/edit_division/{division_id}', [ShipareaController::class, 'editDivisionPage']);
+    Route::post('/update_division', [ShipareaController::class, 'updateDivision'])->name('update-division');
+    Route::get('/delete/division/{id}', [ShipareaController::class, 'deleteDivision']);
+    Route::get('/district_page', [ShipareaController::class, 'districtPage'])->name('add-district-page');
+    Route::post('/add_district', [ShipareaController::class, 'addDistrict'])->name('add-district');
+    Route::get('/delete/district/{district_id}', [ShipareaController::class, 'deleteDistrict']);
+    Route::match(['get', 'post'], '/edit_district/{district_id}', [ShipareaController::class, 'editUpdateDistrict'])->name('edit-update');
+    Route::get('/add-state-page', [ShipareaController::class, 'statePage'])->name('add-state-page');
+    /////////////Get District with Ajax
+    Route::get('/get_district/{district_id}', [ShipareaController::class, 'getDistrict']);
+    ////End Ajax///////
+    Route::post('/add_state', [ShipareaController::class, 'addState'])->name('add-state');
+    Route::get('/edit_state/{id}', [ShipareaController::class, 'editState']);
+    Route::post('/update_state', [ShipareaController::class, 'updateState'])->name('update-state');    
+    Route::get('/delete/state/{id}', [ShipareaController::class, 'deleteState']);    
 });
 
 //*********************************************User Route*********************************************** */

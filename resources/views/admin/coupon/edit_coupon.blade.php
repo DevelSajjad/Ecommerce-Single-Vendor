@@ -16,7 +16,7 @@ active
                         <div class="card-title">
                             Update Coupon
                         </div>
-                        <form action="{{ url('/admin/edit-coupon') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/admin/edit-coupon') }}" method="post">
                             @csrf
                             <input type="hidden" name="coupon_id" value="{{ $coupon->id }}">
                             

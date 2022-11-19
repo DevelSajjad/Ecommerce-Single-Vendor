@@ -45,7 +45,7 @@
           <li class="nav-item"><a href="{{ route('sub-category') }}" class="nav-link @yield('subcategory') ">Add Sub-Category</a></li>
           <li class="nav-item"><a href="{{ route('sub-sub-category') }}" class="nav-link @yield('subsubcategory') ">Add Sub-Sub-Category</a></li>
         </ul>
-
+        
         <a href="#" class="sl-menu-link  show-sub">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
@@ -57,8 +57,21 @@
           <li class="nav-item"><a href="{{ route('add-product') }}" class="nav-link @yield('add-product') ">Add Product</a></li>
           <li class="nav-item"><a href="{{ route('manage-product') }}" class="nav-link @yield('manage-product') ">Manage Product</a></li>
         </ul>
+
+        <a href="#" class="sl-menu-link  show-sub">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon fa fa-list-alt tx-20"></i>
+            <span class="menu-item-label @yield('ship')">Ship Area</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('add-division-page') }}" class="nav-link @yield('add-division') ">Add Division</a></li>
+          <li class="nav-item"><a href="{{ route('add-district-page') }}" class="nav-link @yield('add-district') ">Add Discrict</a></li>
+          <li class="nav-item"><a href="{{ route('add-state-page') }}" class="nav-link @yield('add-state') ">Add States</a></li>    
+        </ul>
         <!-- sl-menu-link -->
       </div><!-- sl-sideleft-menu -->
-
+      
       <br>
     </div><!-- sl-sideleft -->

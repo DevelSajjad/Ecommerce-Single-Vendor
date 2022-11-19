@@ -107,13 +107,13 @@
             var category_id = $(this).val();
             if(category_id){
                 $.ajax({
-                    url: "{{ url('admin/subcategory/ajax') }}/"+category_id,
+                    url: "{{ url('admin/subcategory/ajax') }}/" + category_id,
                     type: "GET",
                     dataType: "json",
                     success: function(data){
                         var d = $("#subcategory_id").empty();
                         $.each(data, function(key, value){
-                            $("#subcategory_id").append('<option value="'+value.id+'"> '+value.subcategory_name_en+ '</option> ');
+                            $("#subcategory_id").append('<option value="'+value.id+'"> '+value.subcategory_name_en+'</option> ');
                         });
                     }
                 });

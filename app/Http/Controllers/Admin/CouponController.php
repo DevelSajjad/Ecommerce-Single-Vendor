@@ -37,7 +37,7 @@ class CouponController extends Controller
             $coupon = Coupon::findOrFail($id);
             return view('admin.coupon.edit_coupon', compact('coupon'));
         }
-        
+         
         $coupon_id = $request->coupon_id;
         $request->validate([
             'coupon_name' => 'required',
@@ -51,6 +51,11 @@ class CouponController extends Controller
             'updated_at'    => Carbon::now(),
         ]);
         return redirect()->back()->with('message', 'Coupon Update Successful');
+    }
+    public function deleteCoupon($id)
+    {
+        Coupon::findOrFail($id)->delete();
+        return redirect()->route('coupon')->with('message', 'Coupon Delete Successful' );
     }
 
 }
