@@ -37,7 +37,7 @@
                                     <th class="cart-sub-total item">Subtotal</th>
                                 </tr>
                             </thead><!-- /thead -->
-                            <tfoot>
+                            {{-- <tfoot>
                                 <tr>
                                     <td colspan="7">
                                         <div class="shopping-cart-btn">
@@ -48,7 +48,7 @@
                                         </div><!-- /.shopping-cart-btn -->
                                     </td>
                                 </tr>
-                            </tfoot>
+                            </tfoot> --}}
                             <tbody id="cartList">
                                 
                             </tbody><!-- /tbody -->
@@ -56,33 +56,51 @@
                     </div>
                 </div><!-- /.shopping-cart-table -->				
 
+				<div class="col-md-6 col-sm-12 estimate-ship-tax">
+					@if (!Session::has('coupon'))
+					<table class="table" id="couponTbl">
+						<thead>
+							<tr>
+								<th>
+									<span class="estimate-title">Discount Code</span>
+									<p>Enter your coupon code if you have one..</p>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+								<tr>
+									<td>
+										<div class="form-group">
+											<input type="text"  id="coupon_apply"  class="form-control unicase-form-control text-input" placeholder="You Coupon..">
+										</div>
+										<div class="clearfix pull-right">
+											<button type="submit" onclick="couponApply()" class="btn-upper btn btn-primary">APPLY COUPON</button>
+										</div>
+									</td>
+								</tr>
+						</tbody><!-- /tbody -->
+					</table><!-- /table -->
+					@endif
+				</div><!-- /.estimate-ship-tax -->
 
-<div class="col-md-4 col-sm-12 cart-shopping-total">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>
-					<div class="cart-sub-total">
-						Subtotal<span class="inner-left-md">$600.00</span>
-					</div>
-					<div class="cart-grand-total">
-						Grand Total<span class="inner-left-md">$600.00</span>
-					</div>
-				</th>
-			</tr>
-		</thead><!-- /thead -->
-		<tbody>
-				<tr>
-					<td>
-						<div class="cart-checkout-btn pull-right">
-							<button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
-							<span class="">Checkout with multiples address!</span>
-						</div>
-					</td>
-				</tr>
-		</tbody><!-- /tbody -->
-	</table><!-- /table -->
-</div><!-- /.cart-shopping-total -->			</div><!-- /.shopping-cart -->
+				<div class="col-md-6 col-sm-12 cart-shopping-total">
+					<table class="table">
+						<thead id="coupon_cal">
+							
+						</thead><!-- /thead -->
+						<tbody>
+								<tr>
+									<td>
+										<div class="cart-checkout-btn pull-right">
+											<button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
+											<span class="">Checkout with multiples address!</span>
+										</div>
+									</td>
+								</tr>
+						</tbody><!-- /tbody -->
+					</table><!-- /table -->
+				</div><!-- /.cart-shopping-total -->			
+			</div><!-- /.shopping-cart -->
 		</div> <!-- /.row -->
 	</div><!-- /.container -->
 </div><!-- /.body-content -->
@@ -97,7 +115,7 @@
 			url: "{{ url('/cart/list/view') }}",
 			dataType: "json",
 			success: function (data) {
-				cartListView();
+				// cartListView();
 				miniCart();
 				var cartList = " ";
 				$.each(data.carts, function (key, value) {		
@@ -155,6 +173,7 @@
 				dataType: "json",
 				url: "{{ url('/cart/quantity/increment/') }}/" + rowId,
 				success: function(data) {
+					couponCalculation();
 					cartListView();
 				}
 			})
@@ -166,9 +185,122 @@
 				dataType: "json",
 				url: "{{ url('/cart/quantity/decrement/') }}/" + rowId,
 				success: function(data) {
+					couponCalculation();
 					cartListView();
 				}
 			})
+		}
+	</script>
+	<script>
+		function couponApply()
+		{
+			var coupon = $("#coupon_apply").val();
+			$.ajax({
+				type: "POST",
+				url: "{{ url('/coupon_apply') }}",
+				dataType: "json",
+				data: {coupon_name:coupon},
+				success: function(data) {
+					if (data.hasOwnProperty("success")) {
+						$("#coupon_apply").val('');
+						couponCalculation();
+						$("#couponTbl").hide();	
+					}
+					const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        })
+
+                           if($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
+                            })
+                           }else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                           }
+				}
+			});
+		}
+	</script>
+	<script>
+		function couponCalculation()
+		{
+			$.ajax({
+				type: "GET",
+				url: "{{ url('/coupon/calculation/') }}",
+				dataType: "json",
+				success: function(data) {
+					if (!data.total) {
+						$("#coupon_cal").html(`
+							<tr>
+								<th>
+									<div class="cart-sub-total">
+										Subtotal<span class="inner-left-md">TK ${data.subtotal}</span>
+									</div>
+									<div class="cart-sub-total">
+										<button class="btn btn-sm btn-danger" onclick="couponRemove()" type="submit" >X</button>
+										Coupon<span class="inner-left-md">${data.coupon_name}</span>
+									</div>
+									<div class="cart-grand-total">
+										Discount<span class="inner-left-md">TK ${data.discount_amount}</span>
+									</div>
+									<div class="cart-grand-total">
+										Grand Total<span class="inner-left-md">TK ${data.total_amount}</span>
+									</div>
+								</th>
+							</tr>
+						`);
+					} else {
+						$("#coupon_cal").html(`
+							<tr>
+								<th>
+									<div class="cart-sub-total">
+										Subtotal<span class="inner-left-md">TK ${data.total}</span>
+									</div>
+								</th>
+							</tr>
+						`);
+					}
+				}
+			});
+		}
+		couponCalculation();
+		function couponRemove()
+		{
+			$.ajax({
+				type: "GET",
+				url: "{{ url('/coupon/remove') }}",
+				dataType: "json",
+				success: function (data) {
+					$("#couponTbl").show();
+					couponCalculation();
+
+					const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        })
+
+                           if($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
+                            })
+                           }else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                           }
+				}
+			});
 		}
 	</script>
 @endsection

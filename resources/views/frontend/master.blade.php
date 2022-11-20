@@ -376,7 +376,7 @@
         <div class="modal-footer">
            <input type="hidden" id="product_id">
           <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success" onclick="addCart()">Add Cart</button>
+          <button type="submit" class="btn btn-success" id="cartbtn" onclick="addCart()">Add Cart</button>
         </div>
       </div>
     </div>
@@ -617,7 +617,7 @@
                         $("#pname").append(data.products.product_name_en);
                     }    
                     $("#pimg").attr('src', '/'+data.products.product_thumbnail);
-                    $("#price").text(data.products.selling_price - data.products.discount_price);
+                    $("#price").text(data.products.selling_price);
                     $("#pdiscount").text(data.products.discount_price);
                     $("#pcode").text(data.products.product_code);
                     $("#pcatname").text(data.products.categories.category_name_en);
@@ -625,12 +625,15 @@
                     $("#product_id").val(id);
                     $("#qty").val(1);
                     if(data.products.product_qty > 0) {
+                        $("#cartbtn").show();
                         $("#pstock").css('background-color', 'green').addClass('badge badge-pill badge-success').text('Avilable');
                     }else{
+                        $("#cartbtn").hide();
                         $("#pstock").css('background-color', 'red').addClass('badge badge-pill badge-danger').text('Out Of Stock');
                     }
+                   
                     //size
-                    if(data.size_en == '') {
+                    if (data.size_en == '') {
                         $("#product_size_hide").hide();
                     }else {
                         $("#product_size_hide").show();
@@ -734,6 +737,8 @@
                 url: "/cart/remove/"+rowId,
                 success: function(data) {
                     miniCart();
+                    cartListView();
+                    couponCalculation();
                     const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',

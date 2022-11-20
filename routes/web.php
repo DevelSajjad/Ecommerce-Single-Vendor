@@ -149,6 +149,10 @@ Route::get('/cart/quantity/increment/{rowId}', [CartController::class, 'cartQuan
 Route::get('/cart/quantity/decrement/{rowId}', [CartController::class, 'cartQuantityDecrement']);
 // =====Wishlist=======
 Route::post('add/wishlist/{id}', [CartController::class, 'addWishlist']);
+////////Coupon///////////////
+Route::post('/coupon_apply', [CartController::class, 'couponApply']);
+Route::get('/coupon/calculation', [CartController::class, 'couponCalculation']);
+Route::get('/coupon/remove', [CartController::class, 'couponRemove']);
 
 
 
