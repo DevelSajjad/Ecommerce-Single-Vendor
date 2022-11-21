@@ -51,7 +51,9 @@ class CartController extends Controller
     //Remove Cart
     public function removeCart($rowId)
     {
-        
+        if(Session::has('coupon')) {
+            session()->forget('coupon');
+        }
         Cart::remove($rowId);
         return response()->json(['success' => 'Cart Remove Successful']);
     }
@@ -89,6 +91,8 @@ class CartController extends Controller
     //Cart Increment
     public function cartQuantityIncrement($rowId)
     {
+        $cartQty = Cart::get($rowId);
+        Cart::update($rowId, $cartQty->qty + 1);
         if(Session::has('coupon')) {
             $coupon_name = session()->get('coupon')['coupon_name'];
             $coupon = Coupon::where('coupon_name', $coupon_name)->first();
@@ -99,13 +103,13 @@ class CartController extends Controller
                 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
             ]);
         }
-        $cartQty = Cart::get($rowId);
-        Cart::update($rowId, $cartQty->qty + 1);
         return response()->json();
     }
     ///Cart Decrement
     public function cartQuantityDecrement($rowId)
     {
+        $cartQty = Cart::get($rowId);
+        Cart::update($rowId, $cartQty->qty - 1);
         if(Session::has('coupon')) {
             $coupon_name = session()->get('coupon')['coupon_name'];
             $coupon = Coupon::where('coupon_name', $coupon_name)->first();
@@ -116,8 +120,6 @@ class CartController extends Controller
                 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
             ]);
         }
-        $cartQty = Cart::get($rowId);
-        Cart::update($rowId, $cartQty->qty - 1);
         return response()->json();
     }
     //Coupon Apply///

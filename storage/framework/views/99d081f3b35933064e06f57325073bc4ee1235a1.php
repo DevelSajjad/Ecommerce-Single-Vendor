@@ -739,6 +739,7 @@
                     miniCart();
                     cartListView();
                     couponCalculation();
+                    $("#couponTbl").show();
                     const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -763,7 +764,38 @@
     </script>
 
 
-    <?php echo $__env->yieldContent('js'); ?>
+<script>
+    function addtoWishlist(product_id)
+    {
+        $.ajax({
+            type: "POST",
+            datatype: "json",
+            url: "<?php echo e(url('/add/wishlist/')); ?>/"+product_id,
+            success: function(data) {
+                const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                        })
+
+                           if($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
+                            })
+                           }else {
+                                Toast.fire({
+                                    type: 'error',
+                                    title: data.error
+                                })
+                           }
+            }
+        })
+    }
+</script>
+
+<?php echo $__env->yieldContent('js'); ?>
 
 </body>
 

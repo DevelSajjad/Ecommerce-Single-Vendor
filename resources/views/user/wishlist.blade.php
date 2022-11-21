@@ -33,7 +33,7 @@
                                     <th colspan="4" class="heading-title">My Wishlist</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="wishlists">
                                 
                             </tbody>
                         </table>
@@ -46,38 +46,8 @@
 @endsection
 
 @section('js')
-    {{-- =====================Wishlist Start===================== --}}
-
+{{-- =====================Wishlist Start===================== --}}
 <script>
-    function addtoWishlist(product_id)
-    {
-        $.ajax({
-            type: "POST",
-            datatype: "json",
-            url: "{{ url('/add/wishlist/') }}/"+product_id,
-            success: function(data) {
-                const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                        })
-
-                           if($.isEmptyObject(data.error)){
-                            Toast.fire({
-                                type: 'success',
-                                title: data.success
-                            })
-                           }else {
-                                Toast.fire({
-                                    type: 'error',
-                                    title: data.error
-                                })
-                           }
-            }
-        })
-    }
-   
    function wishlistView()
    {
     $.ajax({
@@ -115,7 +85,7 @@
                                     </td>
                                 </tr>`
             })
-            $('tbody').html(wishlist);
+            $("#wishlists").html(wishlist);
         }
     })
    }
