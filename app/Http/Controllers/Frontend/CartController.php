@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\ShipDivision;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -166,6 +167,7 @@ class CartController extends Controller
         $data['carts'] = Cart::content();
         $data['cartQty'] = Cart::count();
         $data['total'] = Cart::total();
+        $data['divisions'] = ShipDivision::orderBy('division_name', 'ASC')->get();
         if(Auth::user()) {
             if($data['cartQty'] > 0) {
                 return view('frontend.checkout', $data);

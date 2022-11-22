@@ -10,6 +10,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -125,6 +126,13 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/wishlist/view', [WishlistController::class, 'wishlistView']);
     Route::get('/wishlist/data', [WishlistController::class, 'wishlistData']);
     Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'wishlistRemove']);
+    /////////////Get District with Ajax
+    Route::get('/get_district/{division_id}', [CheckoutController::class, 'getDistrict']);
+    Route::get('/get_state/{district_id}', [CheckoutController::class, 'getState']);
+    ////End Ajax///////
+    ////////Payment//////////
+    Route::post('/payment/info/store', [CheckoutController::class, 'paymentInfoStore'])->name('payment-info-store');
+    ////////EndPayment//////////
 
 });
 

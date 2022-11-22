@@ -65,7 +65,6 @@
                                 <label class="form-control-label text-dark">Select District: <span class="tx-danger">*</span></label>
                                 <select class="form-control select2-show-search" name="district_name" id="district_id" data-placeholder="Choose one">
                                     <option value=""> Choose One</option>
-                                    
                                 </select>
                                 @error('district_name')
                                         <span class="text-danger"> {{$message}}</span>

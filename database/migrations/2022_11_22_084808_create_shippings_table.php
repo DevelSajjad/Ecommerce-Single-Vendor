@@ -15,6 +15,15 @@ class CreateShippingsTable extends Migration
     {
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('division_id');
+            $table->unsignedBigInteger('district_id');
+            $table->unsignedBigInteger('state_id');
+            $table->string('shipping_name');
+            $table->string('shipping_email');
+            $table->string('shipping_phone');
+            $table->string('post_code');
+            $table->text('note');
             $table->timestamps();
         });
     }

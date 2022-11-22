@@ -19,7 +19,6 @@ active
                         <form action="" method="post" >
                             @csrf
                             <input type="hidden" name="coupon_id" value="">
-
                             <div class="form-group">
                                 <label class="form-control-label text-dark">Select Division: <span class="tx-danger">*</span></label>
                                 <select class="form-control select2-show-search" name="division_name" data-placeholder="Choose one">
