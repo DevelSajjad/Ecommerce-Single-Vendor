@@ -554,6 +554,7 @@ class ComposerStaticInit11ceb417f3e51cd4caa1cfa7e5e1052a
         'App\\Models\\ShipDistrict' => __DIR__ . '/../..' . '/app/Models/ShipDistrict.php',
         'App\\Models\\ShipDivision' => __DIR__ . '/../..' . '/app/Models/ShipDivision.php',
         'App\\Models\\ShipState' => __DIR__ . '/../..' . '/app/Models/ShipState.php',
+        'App\\Models\\Shipping' => __DIR__ . '/../..' . '/app/Models/Shipping.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Subcategory' => __DIR__ . '/../..' . '/app/Models/Subcategory.php',
         'App\\Models\\Subsubcategory' => __DIR__ . '/../..' . '/app/Models/Subsubcategory.php',

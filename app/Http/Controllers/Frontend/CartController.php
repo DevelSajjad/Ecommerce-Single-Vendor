@@ -9,6 +9,7 @@ use App\Models\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -159,5 +160,18 @@ class CartController extends Controller
     {
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon Remove Successful']);
+    }
+    public function checkout()
+    {
+        $data['carts'] = Cart::content();
+        $data['cartQty'] = Cart::count();
+        $data['total'] = Cart::total();
+        if(Auth::user()) {
+            if($data['cartQty'] > 0) {
+                return view('frontend.checkout', $data);
+            }
+            return redirect()->back();
+        }
+        return redirect()->route('home')->with('error', 'You May Login First');
     }
 }

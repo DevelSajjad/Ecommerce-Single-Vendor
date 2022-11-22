@@ -49,6 +49,7 @@ return array(
     'App\\Models\\ShipDistrict' => $baseDir . '/app/Models/ShipDistrict.php',
     'App\\Models\\ShipDivision' => $baseDir . '/app/Models/ShipDivision.php',
     'App\\Models\\ShipState' => $baseDir . '/app/Models/ShipState.php',
+    'App\\Models\\Shipping' => $baseDir . '/app/Models/Shipping.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\Subcategory' => $baseDir . '/app/Models/Subcategory.php',
     'App\\Models\\Subsubcategory' => $baseDir . '/app/Models/Subsubcategory.php',

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[IndexController::class,'index']);
+Route::get('/',[IndexController::class,'index'])->name('home');
 
 Auth::routes();
 
@@ -153,6 +153,8 @@ Route::post('add/wishlist/{id}', [CartController::class, 'addWishlist']);
 Route::post('/coupon_apply', [CartController::class, 'couponApply']);
 Route::get('/coupon/calculation', [CartController::class, 'couponCalculation']);
 Route::get('/coupon/remove', [CartController::class, 'couponRemove']);
+/////////CheckOut//////////
+Route::get('/user/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 
 

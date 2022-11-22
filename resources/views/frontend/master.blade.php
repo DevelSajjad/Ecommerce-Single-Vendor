@@ -48,7 +48,7 @@
                         <li><a href="#"><i class="icon fa fa-user"></i>{{ (session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল' }}</a></li>
                         <li><a href="{{ url('/user/wishlist/view') }}"><i class="icon fa fa-heart"></i>{{ (session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা' }}</a></li>
                         <li><a href="{{ route('cart-list') }}"><i class="icon fa fa-shopping-cart"></i>{{ (session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট' }}</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>{{ (session()->get('language') == 'english') ? 'Checkout' : 'চেকআউট' }}</a></li>
+                        <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>{{ (session()->get('language') == 'english') ? 'Checkout' : 'চেকআউট' }}</a></li>
                         @auth
                             <li><a href="{{ route('user.dashboard') }}"><i class="icon fa fa-check"></i>{{ (session()->get('language') == 'english') ? 'Profile' : 'প্রোফাইল' }}</a></li>
                             <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon fa fa-check"></i><i class="icon fa fa-lock"></i>{{ (session()->get('language') == 'english') ? 'Logout' : 'লগআউট' }}</a></li>
