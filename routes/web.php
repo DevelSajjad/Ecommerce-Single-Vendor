@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -132,6 +133,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     ////End Ajax///////
     ////////Payment//////////
     Route::post('/payment/info/store', [CheckoutController::class, 'paymentInfoStore'])->name('payment-info-store');
+    Route::post('/payment/order/store', [StripeController::class, 'paymentOrderStore'])->name('stripe-order');
     ////////EndPayment//////////
 
 });

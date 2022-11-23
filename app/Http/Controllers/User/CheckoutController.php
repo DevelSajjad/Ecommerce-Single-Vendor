@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\ShipDistrict;
 use App\Models\ShipState;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -21,6 +22,30 @@ class CheckoutController extends Controller
     }
     public function paymentInfoStore(Request $request)
     {
-        dd($request->all());
+        $data['shipping_name'] = $request->shipping_name;
+        $data['shipping_email'] = $request->shipping_email;
+        $data['shipping_phone'] = $request->shipping_phone;
+        $data['post_code'] = $request->post_code;
+        $data['division_name'] = $request->division_name;
+        $data['district_name'] = $request->district_name;
+        $data['state_name'] = $request->state_name;
+        $data['note'] = $request->note;
+        $data['total_amount'] = Cart::total();
+        
+        $request->validate([
+            'post_code'         => 'required|integer',
+            'division_name'     => 'required',
+            'district_name'     => 'required',
+            'state_name'        =>  'required',
+            'note'              => 'required',
+        ]);
+        if ($request->payment == 'stripe') {
+            return view('frontend.payment.stripe', $data);
+        } elseif ($request->payment == 'card') {
+            return 'card';
+        } else {
+            return 'cash on delivery';
+        }
+        
     }
 }

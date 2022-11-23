@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '56fcb5b80d750f8f468b80797020687ffefc3fc1',
+        'reference' => '60131c59197f70695f15ce8e568dc8930d37726f',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -409,7 +409,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '56fcb5b80d750f8f468b80797020687ffefc3fc1',
+            'reference' => '60131c59197f70695f15ce8e568dc8930d37726f',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -925,6 +925,15 @@
             'aliases' => array(),
             'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
             'dev_requirement' => true,
+        ),
+        'stripe/stripe-php' => array(
+            'pretty_version' => 'v10.0.0',
+            'version' => '10.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stripe/stripe-php',
+            'aliases' => array(),
+            'reference' => 'a895466e5208cc7974bc3bed80abe825418ce0b0',
+            'dev_requirement' => false,
         ),
         'swiftmailer/swiftmailer' => array(
             'pretty_version' => 'v6.3.0',

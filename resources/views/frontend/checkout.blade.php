@@ -60,6 +60,9 @@
 													<div class="form-group">
 														<label class="info-title" for="exampleInputEmail1">Post Code <span>*</span></label>
 														<input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="">
+													@error('post_code')
+															<span class="text-danger"> {{$message}}</span>
+													@enderror
 													</div>
 											</div>	
 											<div class="col-md-6 col-sm-6 already-registered-login">
@@ -258,16 +261,16 @@
 									<div class="">
 										<ul class="nav nav-checkout-progress list-unstyled">
 											<li>
-												<label for="">Stipe</label>
 												<input type="radio" name="payment" value="stripe" id="">
+												<label for="">Stripe</label>
 											</li>
 											<li>
-												<label for="">Card</label>
 												<input type="radio" name="payment" value="card" id="">
+												<label for="">Card</label>
 											</li>
 											<li>
-												<label for="">Cash On Delivery</label>
 												<input type="radio" name="payment" value="cash" id="">
+												<label for="">Cash On Delivery</label>
 											</li>
 											<button type="submit" class="btn-upper btn btn-primary checkout-page-button pull-right">Payment Step</button>
 										</ul>		
