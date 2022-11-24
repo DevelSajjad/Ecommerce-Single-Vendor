@@ -85,14 +85,14 @@
                             <label for="card-element">
                             Credit or debit card
                             </label>
-                            {{-- <input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
-                            <input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
-                            <input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
-                            <input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
-                            <input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
-                            <input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
-                            <input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
-                            <input type="hidden" name="notes" value="{{ $data['notes'] }}"> --}}
+                            <input type="hidden" name="name" value="{{ $shipping_name }}">
+                            <input type="hidden" name="email" value="{{ $shipping_email }}">
+                            <input type="hidden" name="phone" value="{{ $shipping_phone }}">
+                            <input type="hidden" name="post_code" value="{{ $post_code }}">
+                            <input type="hidden" name="division_id" value="{{ $division_id }}">
+                            <input type="hidden" name="district_id" value="{{ $district_id }}">
+                            <input type="hidden" name="state_id" value="{{ $state_id }}">
+                            <input type="hidden" name="note" value="{{ $note }}">
                             <div id="card-element">
                             <!-- A Stripe Element will be inserted here. -->
                             </div>
