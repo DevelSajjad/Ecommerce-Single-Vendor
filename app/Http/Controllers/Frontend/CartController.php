@@ -33,8 +33,7 @@ class CartController extends Controller
                 'color' => $request->color,
                 'image' => $product->product_thumbnail,
                 'slug' => $product->product_slug_en, 
-                ],
-             
+                ], 
         ]);
         return response()->json(['success' => 'Successful Add To Cart']);
     }

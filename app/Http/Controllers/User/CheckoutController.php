@@ -32,7 +32,7 @@ class CheckoutController extends Controller
         $data['state_id'] = $request->state_name;
         $data['note'] = $request->note;
         $data['total_amount'] = Cart::total();
-        
+        $data['qty']      = Cart::count();
         $request->validate([
             'post_code'         => 'required|integer',
             'division_name'     => 'required',
@@ -41,8 +41,10 @@ class CheckoutController extends Controller
         ]);
         if ($request->payment == 'stripe') {
             return view('frontend.payment.stripe', $data);
-        } elseif ($request->payment == 'card') {
-            return 'card';
+        } elseif ($request->payment == 'sslhost') {
+            return view('frontend.payment.sslhost', $data);
+        } elseif ($request->payment == 'ssleasy') {
+            return 'easy';
         } else {
             return 'cash on delivery';
         }

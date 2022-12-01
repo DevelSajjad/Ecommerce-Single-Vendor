@@ -265,8 +265,12 @@
 												<label for="">Stripe</label>
 											</li>
 											<li>
-												<input type="radio" name="payment" value="card" id="">
-												<label for="">Card</label>
+												<input type="radio" name="payment" value="sslhost" id="">
+												<label for="">SSL Host</label>
+											</li>
+											<li>
+												<input type="radio" name="payment" value="ssleasy" id="">
+												<label for="">SSL Easy</label>
 											</li>
 											<li>
 												<input type="radio" name="payment" value="cash" id="">

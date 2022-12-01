@@ -11,7 +11,6 @@ class CouponController extends Controller
 {
     public function couponPage()
     {
-        
         $coupons = Coupon::where('status', 1)->orderByDesc('id')->get();
         return view('admin.coupon.coupon_page', compact('coupons'));
     }
