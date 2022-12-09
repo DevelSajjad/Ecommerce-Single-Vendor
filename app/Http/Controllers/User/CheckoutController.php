@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         } elseif ($request->payment == 'sslhost') {
             return view('frontend.payment.sslhost', $data);
         } elseif ($request->payment == 'ssleasy') {
-            return 'easy';
+            return view('frontend.payment.ssleasy');
         } else {
             return 'cash on delivery';
         }
