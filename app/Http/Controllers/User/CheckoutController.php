@@ -39,15 +39,22 @@ class CheckoutController extends Controller
             'district_name'     => 'required',
             'state_name'        =>  'required',
         ]);
-        if ($request->payment == 'stripe') {
-            return view('frontend.payment.stripe', $data);
-        } elseif ($request->payment == 'sslhost') {
-            return view('frontend.payment.sslhost', $data);
-        } elseif ($request->payment == 'ssleasy') {
-            return view('frontend.payment.ssleasy');
+
+        $payment = ['stripe' => 'stripe', 'sslhost' => 'sslhost', 'ssleasy' => 'ssleasy'];
+        if(in_array($request->payment, $payment)) {
+            return view('frontend.payment.' . $payment[$request->payment], $data);
         } else {
-            return 'cash on delivery';
+            return 'Cash On Delivery';
         }
+        // if ($request->payment == 'stripe') {
+        //     return view('frontend.payment.stripe', $data);
+        // } elseif ($request->payment == 'sslhost') {
+        //     return view('frontend.payment.sslhost', $data);
+        // } elseif ($request->payment == 'ssleasy') {
+        //     return view('frontend.payment.ssleasy');
+        // } else {
+        //     return 'cash on delivery';
+        // }
         
     }
 }
