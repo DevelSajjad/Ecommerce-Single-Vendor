@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Mail\OrderMail;
+use App\Models\Order;
 use App\Models\OrderItem;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -66,12 +70,6 @@ class SslCommerzPaymentController extends Controller
         $post_data['product_category'] = "Goods";
         $post_data['product_profile'] = "physical-goods";
 
-        # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "ref001";
-        $post_data['value_b'] = "ref002";
-        $post_data['value_c'] = "ref003";
-        $post_data['value_d'] = "ref004";
-
         #Before  going to initiate the payment order status need to insert or update as Pending.
         $update_product = DB::table('orders')
             ->where('transaction_id', $post_data['tran_id'])
@@ -89,7 +87,7 @@ class SslCommerzPaymentController extends Controller
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
                 'amount' => $post_data['total_amount'],
-                'invoice_no' => 'SML'.mt_rand(10000000, 99999999),
+                'invoice_no' => 'GML'.mt_rand(10000000, 99999999),
                 'order_date' => Carbon::now()->format('d F Y'),
                 'order_month' => Carbon::now()->format('F'),
                 'order_year' => Carbon::now()->format('Y'),
@@ -109,6 +107,12 @@ class SslCommerzPaymentController extends Controller
                         'created_at'        => Carbon::now()
                     ]);
                 }
+        # OPTIONAL PARAMETERS
+        $orders = Order::findOrFail($order_id);
+        $post_data['value_a'] = $request->name;
+        $post_data['value_b'] = $request->phone;
+        $post_data['value_c'] = $orders->invoice_no;
+        $post_data['value_d'] = $request->email;
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
@@ -166,13 +170,6 @@ class SslCommerzPaymentController extends Controller
         $post_data['product_category'] = "Goods";
         $post_data['product_profile'] = "physical-goods";
 
-        # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "ref001";
-        $post_data['value_b'] = "ref002";
-        $post_data['value_c'] = "ref003";
-        $post_data['value_d'] = "ref004";
-
-
         #Before  going to initiate the payment order status need to update as Pending.
         $update_product = DB::table('orders')
             ->where('transaction_id', $post_data['tran_id'])
@@ -190,7 +187,7 @@ class SslCommerzPaymentController extends Controller
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
                 'amount' => $post_data['total_amount'],
-                'invoice_no' => 'SML'.mt_rand(10000000, 99999999),
+                'invoice_no' => 'GML'.mt_rand(10000000, 99999999),
                 'order_date' => Carbon::now()->format('d F Y'),
                 'order_month' => Carbon::now()->format('F'),
                 'order_year' => Carbon::now()->format('Y'),
@@ -211,6 +208,12 @@ class SslCommerzPaymentController extends Controller
                         'created_at'        => Carbon::now()
                     ]);
                 }
+            $orders = Order::findOrFail($order_id);
+        # OPTIONAL PARAMETERS
+        $post_data['value_a'] = $requestData['cus_name'];
+        $post_data['value_b'] = $requestData['cus_phone'];
+        $post_data['value_c'] = $orders->invoice_no;
+        $post_data['value_d'] = $requestData['cus_email'];
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
@@ -226,7 +229,6 @@ class SslCommerzPaymentController extends Controller
     public function success(Request $request)
     {
         echo "Transaction is Successful";
-
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
         $currency = $request->input('currency');
@@ -253,6 +255,20 @@ class SslCommerzPaymentController extends Controller
                     ->update(['status' => 'Processing']);
 
                 echo "<br >Transaction is successfully Completed";
+                $mailData = [
+                    'name' => $request->value_a,
+                    'number' => $request->value_b,
+                    'invoice_no' => $request->value_c,
+                    'tran_id'   => $request->tran_id,
+                    'payment_type' => $request->card_issuer,
+                    'amount'    => $request->amount
+                ];
+                Mail::to($request->value_d)->send(new OrderMail($mailData));
+                if(Session::has('coupon')) {
+                    Session::forget('coupon');
+                }
+                Cart::destroy();
+                return redirect()->route('home')->with('message', 'Your Order Place Successful');
             }
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
             /*

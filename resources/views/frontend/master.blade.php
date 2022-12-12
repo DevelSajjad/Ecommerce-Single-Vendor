@@ -165,7 +165,7 @@
 						<span class="text">Sub Total :</span><span id="subTotal" class='price'></span>
 				</div>
 				<div class="clearfix"></div>
-				<a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+				<a href="{{ route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
 			</div><!-- /.cart-total-->
 		</li>
 		</ul><!-- /.dropdown-menu-->

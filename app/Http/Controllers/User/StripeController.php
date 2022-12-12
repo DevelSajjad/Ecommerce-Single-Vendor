@@ -84,6 +84,6 @@ class StripeController extends Controller
             Session::forget('coupon');
         }
         Cart::destroy();
-        return redirect()->route('home')->with('message', 'You Order Place Success');
+        return redirect()->route('home')->with('message', 'You Order Place Successful');
     }
 }
