@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class StripeController extends Controller
@@ -54,7 +56,18 @@ class StripeController extends Controller
             'status'                => 'pending',
             'created_at'            => Carbon::now()
         ]);
-
+        // Start Mail
+        $orders = Order::findOrFail($order_id);
+        $mailData = [
+            'name' => $orders->name,
+            'number' => $orders->phone,
+            'invoice_no' => $orders->invoice_no,
+            'tran_id'   => $orders->transaction_id,
+            'payment_type' => $orders->payment_type,
+            'amount'    => $orders->amount
+        ];
+        Mail::to($request->email)->send(new OrderMail($mailData));
+        // End Mail
         $carts = Cart::content();
         foreach ($carts as $cart) {
             OrderItem::insert([
