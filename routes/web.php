@@ -16,6 +16,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SslCommerzPaymentController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -181,3 +182,10 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
+Route::get('/cache-clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return 'All Cache Has Been Cleared';
+});

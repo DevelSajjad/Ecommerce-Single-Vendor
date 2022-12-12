@@ -6,7 +6,7 @@
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="{{ url('/') }}">Home</a></li>
-				<li class='active'>Login</li>
+				<li class='active'>Reset Password</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -18,9 +18,12 @@
 			<div class="row text-center">
 				<!-- Sign-in -->
 <div class="col-md-12 col-sm-12 sign-in">
+		@if (session('status'))
+			<div class="alert alert-success" role="alert">
+				{{ session('status') }}
+			</div>
+		@endif
 	<h4 class="text-center " style="font-weight: 900; font-size: 30px">Forget Password</h4>
-
-
 	<form action="{{ route('password.email') }}" method="POST" class="register-form outer-top-xs" role="form">
         @csrf
 		<div class="form-group">
