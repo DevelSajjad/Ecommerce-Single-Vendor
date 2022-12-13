@@ -45,6 +45,7 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
+                        <li><a href="{{ url('/cache-clear') }}"> Cache Clear</a></li>
                         <li><a href="#"><i class="icon fa fa-user"></i>{{ (session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল' }}</a></li>
                         <li><a href="{{ url('/user/wishlist/view') }}"><i class="icon fa fa-heart"></i>{{ (session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা' }}</a></li>
                         <li><a href="{{ route('cart-list') }}"><i class="icon fa fa-shopping-cart"></i>{{ (session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট' }}</a></li>

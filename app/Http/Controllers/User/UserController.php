@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -97,5 +99,16 @@ class UserController extends Controller
             return redirect()->back()->with('error','Enter Your Correct Old Password');
         }
         return redirect()->back()->with('message','Password Change Successful');
+    }
+    public function orders() 
+    {
+        $orders = Order::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('user.order.orders', compact('orders'));
+    }
+    public function viewOrder($order_id)
+    {
+        $data['order'] = Order::with('user', 'division', 'district', 'state')->where('id', $order_id)->where('user_id', Auth::user()->id)->first();
+        $data['order_items'] = OrderItem::with('product')->where('order_id', $order_id)->orderBy('id', 'desc')->limit(10)->get();
+        return view('user.order.view_order', $data);
     }
 }

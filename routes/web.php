@@ -138,6 +138,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/payment/order/store', [StripeController::class, 'paymentOrderStore'])->name('stripe-order');
     ////////EndPayment//////////
 
+    /////Order Route
+    Route::get('/order', [UserController::class, 'orders'])->name('order-list');
+    Route::get('order-view/{order_id}', [UserController::class, 'viewOrder']);
 });
 Route::group(['middleware' => ['user', 'auth']], function () {
     // SSLCOMMERZ Start
@@ -188,5 +191,5 @@ Route::get('/cache-clear', function() {
     Artisan::call('route:clear');
     Artisan::call('config:clear');
     Artisan::call('view:clear');
-    return 'All Cache Has Been Cleared';
+    return redirect()->back()->with('message', 'All Cache Has Been Cleared');
 });

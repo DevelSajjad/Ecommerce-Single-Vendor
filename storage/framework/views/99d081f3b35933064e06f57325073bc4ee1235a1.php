@@ -45,6 +45,7 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
+                        <li><a href="<?php echo e(url('/cache-clear')); ?>"> Cache Clear</a></li>
                         <li><a href="#"><i class="icon fa fa-user"></i><?php echo e((session()->get('language') == 'english') ? 'My Account' : 'প্রোফাইল'); ?></a></li>
                         <li><a href="<?php echo e(url('/user/wishlist/view')); ?>"><i class="icon fa fa-heart"></i><?php echo e((session()->get('language') == 'english') ? 'Wishlis' : 'পছন্দ তালিকা'); ?></a></li>
                         <li><a href="<?php echo e(route('cart-list')); ?>"><i class="icon fa fa-shopping-cart"></i><?php echo e((session()->get('language') == 'english') ? 'My Cart' : 'আমার কার্ট'); ?></a></li>
