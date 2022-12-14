@@ -33,7 +33,7 @@
             <span class="menu-item-label">Coupon</span>
           </div>
         </a>
-        <a href="#" class="sl-menu-link @yield('orders') show-sub">
+        <a href="#" class="sl-menu-link @yield('order') show-sub">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
             <span class="menu-item-label">Orders</span>
