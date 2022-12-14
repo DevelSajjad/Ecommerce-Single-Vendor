@@ -34,7 +34,7 @@
                             <td> {{ $order->transaction_id }} </td>
                             <td> {{ $order->status }} </td>
                             <td>
-                                <a href="{{ url('admin/edit-category',$order->id) }}" class="btn btn-info btn-sm"><i title="Edit Category" class="fa fa-pencil"></i></a>
+                                <a href="{{ url('admin/view/single_order',$order->id) }}" class="btn btn-info btn-sm"><i title="View Order" class="fa fa-eye"></i></a>
                                 <a href="{{ url('admin/delete-category',$order->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete Category"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>

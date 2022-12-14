@@ -73,7 +73,7 @@
                                     <strong>Payment Method:</strong> {{ $order->payment_method }}
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Total Amount:</strong> {{ $order->amount }}
+                                    <strong>Total Amount:</strong> {{ $order->amount }} TK
                                 </li>
                                 <li class="list-group-item">
                                     <strong>Order Date:</strong> {{ $order->order_date }}
@@ -102,7 +102,7 @@
                                     <td>{{ $order_item->color }}</td>
                                     <td>{{ $order_item->size }}</td>
                                     <td>{{ $order_item->qty }}</td>
-                                    <td>{{ $order_item->price }}</td>
+                                    <td>{{ $order_item->price }} TK</td>
                                 </tr>
                             @endforeach
                         </tbody>

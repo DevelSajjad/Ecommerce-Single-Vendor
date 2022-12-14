@@ -120,6 +120,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     //Orders
         
     Route::get('/pending/order', [OrderController::class, 'pendingOrder'])->name('pending-order');
+    Route::get('/processing/order', [OrderController::class, 'processingOrder'])->name('processing-order');
+    Route::get('/confirm/order', [OrderController::class, 'confirmOrder'])->name('confirm-order');
+    Route::get('/picked/order', [OrderController::class, 'pickedOrder'])->name('picked-order');
+    Route::get('/shipped/order', [OrderController::class, 'shippedOrder'])->name('shipped-order');
+    Route::get('/delivered/order', [OrderController::class, 'deliveredOrder'])->name('delivered-order');
+    Route::get('/cancel/order', [OrderController::class, 'cancelOrder'])->name('cancel-order');
+    Route::get('/view/single_order/{order_id}', [OrderController::class, 'viewOrder']);
 });
 
 //*********************************************User Route*********************************************** */

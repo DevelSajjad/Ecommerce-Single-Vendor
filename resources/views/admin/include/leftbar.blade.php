@@ -42,8 +42,12 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('pending-order') }}" class="nav-link @yield('pending') ">Pending</a></li>
-          <li class="nav-item"><a href="{{ route('sub-category') }}" class="nav-link @yield('subcategory') ">Add Sub-Category</a></li>
-          <li class="nav-item"><a href="{{ route('sub-sub-category') }}" class="nav-link @yield('subsubcategory') ">Add Sub-Sub-Category</a></li>
+          <li class="nav-item"><a href="{{ route('processing-order') }}" class="nav-link @yield('processing') ">Processing</a></li>
+          <li class="nav-item"><a href="{{ route('confirm-order') }}" class="nav-link @yield('confirm') ">Confirm</a></li>
+          <li class="nav-item"><a href="{{ route('picked-order') }}" class="nav-link @yield('picked') ">Picked</a></li>
+          <li class="nav-item"><a href="{{ route('shipped-order') }}" class="nav-link @yield('shipping') ">Shipped</a></li>
+          <li class="nav-item"><a href="{{ route('delivered-order') }}" class="nav-link @yield('delivered') ">Deliver</a></li>
+          <li class="nav-item"><a href="{{ route('cancel-order') }}" class="nav-link @yield('cancel') ">Cancel</a></li>
         </ul>
         <a href="#" class="sl-menu-link @yield('categories') show-sub">
           <div class="sl-menu-item">
