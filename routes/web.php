@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
@@ -114,7 +115,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('/add_state', [ShipareaController::class, 'addState'])->name('add-state');
     Route::get('/edit_state/{id}', [ShipareaController::class, 'editState']);
     Route::post('/update_state', [ShipareaController::class, 'updateState'])->name('update-state');    
-    Route::get('/delete/state/{id}', [ShipareaController::class, 'deleteState']);    
+    Route::get('/delete/state/{id}', [ShipareaController::class, 'deleteState']); 
+    
+    //Orders
+        
+    Route::get('/pending/order', [OrderController::class, 'pendingOrder'])->name('pending-order');
 });
 
 //*********************************************User Route*********************************************** */
@@ -141,6 +146,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     /////Order Route
     Route::get('/order', [UserController::class, 'orders'])->name('order-list');
     Route::get('order-view/{order_id}', [UserController::class, 'viewOrder']);
+    Route::get('invoice-download/{order_id}', [UserController::class, 'invoiceDownload']);
 });
 Route::group(['middleware' => ['user', 'auth']], function () {
     // SSLCOMMERZ Start

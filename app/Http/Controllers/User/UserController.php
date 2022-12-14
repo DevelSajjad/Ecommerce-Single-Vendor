@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Image;
+
+
+
 class UserController extends Controller
 {
     public function index(){
@@ -110,5 +114,13 @@ class UserController extends Controller
         $data['order'] = Order::with('user', 'division', 'district', 'state')->where('id', $order_id)->where('user_id', Auth::user()->id)->first();
         $data['order_items'] = OrderItem::with('product')->where('order_id', $order_id)->orderBy('id', 'desc')->limit(10)->get();
         return view('user.order.view_order', $data);
+    }
+    public function invoiceDownload($order_id)
+    {
+        $data['order'] = Order::with('user', 'division', 'district', 'state')->where('id', $order_id)->where('user_id', Auth::user()->id)->first();
+        $data['order_items'] = OrderItem::with('product')->where('order_id', $order_id)->orderBy('id', 'desc')->limit(10)->get();
+        $pdf = PDF::loadView('user.order.invoice', $data)->setPaper('a4');
+        return $pdf->download('invoice.pdf');
+        
     }
 }

@@ -108,9 +108,13 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-12 offset-md-3 col-sm-12">
-                    <textarea name="" id="" placeholder="Return Reason" cols="150" rows="5"></textarea>
-                </div>
+                    @if ($order->state == 'delivered')
+                        <div class="col-md-12 offset-md-3 col-sm-12">
+                            <textarea name="" id="" placeholder="Return Reason" cols="150" rows="5"></textarea>
+                        </div>
+                    @else
+                        
+                    @endif
             </div>
         </div>
     </div>
