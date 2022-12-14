@@ -120,7 +120,6 @@ class UserController extends Controller
         $data['order'] = Order::with('user', 'division', 'district', 'state')->where('id', $order_id)->where('user_id', Auth::user()->id)->first();
         $data['order_items'] = OrderItem::with('product')->where('order_id', $order_id)->orderBy('id', 'desc')->limit(10)->get();
         $pdf = PDF::loadView('user.order.invoice', $data)->setPaper('a4');
-        return $pdf->download('invoice.pdf');
-        
+        return $pdf->download('invoice.pdf');    
     }
 }

@@ -35,6 +35,7 @@
                             <td> {{ $order->status }} </td>
                             <td>
                                 <a href="{{ url('admin/view/single_order',$order->id) }}" class="btn btn-info btn-sm"><i title="View Order" class="fa fa-eye"></i></a>
+                                <a href="{{ url('admin/invoice-download/'.$order->id) }}"  class="btn btn-sm btn-danger "><i class="fa fa-download" style="color:white;"></i> Invoice</a>
                             </td>
                         </tr>
                        @endforeach

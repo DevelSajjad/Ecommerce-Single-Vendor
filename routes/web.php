@@ -117,8 +117,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('/update_state', [ShipareaController::class, 'updateState'])->name('update-state');    
     Route::get('/delete/state/{id}', [ShipareaController::class, 'deleteState']); 
     
-    //Orders
-        
+    //Orders  
     Route::get('/pending/order', [OrderController::class, 'pendingOrder'])->name('pending-order');
     Route::get('/processing/order', [OrderController::class, 'processingOrder'])->name('processing-order');
     Route::get('/confirm/order', [OrderController::class, 'confirmOrder'])->name('confirm-order');
@@ -127,6 +126,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/delivered/order', [OrderController::class, 'deliveredOrder'])->name('delivered-order');
     Route::get('/cancel/order', [OrderController::class, 'cancelOrder'])->name('cancel-order');
     Route::get('/view/single_order/{order_id}', [OrderController::class, 'viewOrder']);
+
+    //Order Status Update
+    Route::get('/pending_to_confirm/{order_id}', [OrderController::class, 'pendingToConfirm']);
+    Route::get('/confirm_to_process/{order_id}', [OrderController::class, 'confirmToProcess']);
+    Route::get('/process_to_picked/{order_id}', [OrderController::class, 'processToPicked']);
+    Route::get('/picked_to_shipped/{order_id}', [OrderController::class, 'pickedToShipped']);
+    Route::get('/shipped_to_deliver/{order_id}', [OrderController::class, 'shippedToDeliver']);
+
+    //Invoice Download
+    Route::get('/invoice-download/{order_id}', [OrderController::class, 'invoiceDownload']);
 });
 
 //*********************************************User Route*********************************************** */

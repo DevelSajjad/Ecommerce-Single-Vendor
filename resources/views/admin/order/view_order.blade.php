@@ -68,6 +68,19 @@
                     <li class="list-group-item">
                         <strong>Order Status:</strong> <span class="badge badge-pill badge-primary">{{ $order->status }}</span>
                     </li>
+                    <li class="list-group-item">
+                        @if ($order->status == 'Pending')
+                            <a href="{{ url('admin/pending_to_confirm/'.$order->id) }}" id="confirm" class="btn btn-success">Confirm</a>
+                            @elseif ($order->status == 'Confirm') 
+                            <a href="{{ url('admin/confirm_to_process/'.$order->id) }}" id="process" class="btn btn-success">Process</a>
+                            @elseif ($order->status == 'Processing') 
+                            <a href="{{ url('admin/process_to_picked/'.$order->id) }}" id="picked" class="btn btn-success">Picked</a>
+                            @elseif ($order->status == 'Picked') 
+                            <a href="{{ url('admin/picked_to_shipped/'.$order->id) }}" id="shipped" class="btn btn-success">Shipped</a>
+                            @elseif ($order->status == 'Shipping') 
+                            <a href="{{ url('admin/shipped_to_deliver/'.$order->id) }}" id="deliver" class="btn btn-success">Deliver</a>
+                        @endif
+                    </li>
                 </ul>
             </div>
             <div class="col-md-12 mt-3 col-sm-12 ">
@@ -98,4 +111,5 @@
             </div>
         </div>
 </div>
+
 @endsection
