@@ -47,6 +47,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('admin/update/image',[AdminController::class,'adminUpdateImage'])->name('admin-image-update');
     Route::get('change/password',[AdminController::class,'adminPassword'])->name('admin-password');
     Route::post('admin/update/password',[AdminController::class,'updatePassword'])->name('admin-update-password');
+    // ********All Users********
+    Route::get('/all_users', [AdminController::class, 'allUsers'])->name('all-users');
+    // *****************
     // **************************Brand***********************
     Route::get('/brands',[BrandController::class,'brands'])->name('brands');
     Route::post('/add_brand',[BrandController::class,'addBrand'])->name('add-brand');

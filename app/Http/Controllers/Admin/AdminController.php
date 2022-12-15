@@ -15,6 +15,13 @@ class AdminController extends Controller
     public function index(){
         return view('admin.home');
     }
+
+    public function allUsers()
+    {
+        $users = User::where('role_id', '!=', 1)->orderBy('id', 'desc')->get();
+        return view('admin.users.all_user', compact('users'));
+    }
+
     public function editPage() {
         return view('admin.profile.profile');
     }

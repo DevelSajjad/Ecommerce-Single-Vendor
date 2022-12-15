@@ -4,6 +4,7 @@
         <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
       </div><!-- sl-header-left -->
       <div class="sl-header-right">
+        <a href="{{ route('all-users') }}" style="color: white" ><i class="icon ion-ios-person-outline"></i> All Users</a>
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
