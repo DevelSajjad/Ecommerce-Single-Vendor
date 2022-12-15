@@ -122,4 +122,24 @@ class UserController extends Controller
         $pdf = PDF::loadView('user.order.invoice', $data)->setPaper('a4');
         return $pdf->download('invoice.pdf');    
     }
+    //return function
+    public function returnReason(Request $request)
+    {
+        $order_id = $request->order_id;
+        Order::where('user_id', Auth::user()->id)->where('id', $order_id)->update([
+            'return_reason'     => $request->return_reason,
+            'return_date'       => Carbon::now()->format('d F Y')
+        ]);
+        return redirect()->route('order-list')->with('message', 'Your Return Reason Send Successful');
+    }
+    public function returnOrder()
+    {
+        $return_orders = Order::where('user_id', Auth::user()->id)->where('return_reason', '!=', null)->get();
+        return view('user.order.return_orders', compact('return_orders'));
+    }
+    public function cancelOrder()
+    {
+        $cancel_orders = Order::where('user_id', Auth::user()->id)->where('status','Cancel')->get();
+        return view('user.order.cancel_orders', compact('cancel_orders'));
+    }
 }

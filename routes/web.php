@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\BrandController;
@@ -126,16 +127,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/delivered/order', [OrderController::class, 'deliveredOrder'])->name('delivered-order');
     Route::get('/cancel/order', [OrderController::class, 'cancelOrder'])->name('cancel-order');
     Route::get('/view/single_order/{order_id}', [OrderController::class, 'viewOrder']);
-
     //Order Status Update
     Route::get('/pending_to_confirm/{order_id}', [OrderController::class, 'pendingToConfirm']);
     Route::get('/confirm_to_process/{order_id}', [OrderController::class, 'confirmToProcess']);
     Route::get('/process_to_picked/{order_id}', [OrderController::class, 'processToPicked']);
     Route::get('/picked_to_shipped/{order_id}', [OrderController::class, 'pickedToShipped']);
     Route::get('/shipped_to_deliver/{order_id}', [OrderController::class, 'shippedToDeliver']);
-
     //Invoice Download
     Route::get('/invoice-download/{order_id}', [OrderController::class, 'invoiceDownload']);
+    //Report
+    Route::get('/reports', [ReportController::class, 'index'])->name('report');
+    Route::post('/report/search-by-date', [ReportController::class, 'dateReports'])->name('search-by-date');
+    Route::post('/report/search-by-month', [ReportController::class, 'monthReports'])->name('search-by-month');
+    Route::post('/report/search-by-year', [ReportController::class, 'yearReports'])->name('search-by-year');
 });
 
 //*********************************************User Route*********************************************** */
@@ -163,6 +167,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('/order', [UserController::class, 'orders'])->name('order-list');
     Route::get('order-view/{order_id}', [UserController::class, 'viewOrder']);
     Route::get('invoice-download/{order_id}', [UserController::class, 'invoiceDownload']);
+    Route::post('/return-reason', [UserController::class, 'returnReason'])->name('return-reason');
+    Route::get('/return-order', [UserController::class, 'returnOrder'])->name('return-order-list');
+    Route::get('/cancel-order', [UserController::class, 'cancelOrder'])->name('cancel-order-list');
 });
 Route::group(['middleware' => ['user', 'auth']], function () {
     // SSLCOMMERZ Start

@@ -78,6 +78,14 @@
                                 <li class="list-group-item">
                                     <strong>Order Date:</strong> {{ $order->order_date }}
                                 </li>
+                                <li class="list-group-item">
+                                    <strong>Order Status:</strong> {{ $order->status }}
+                                </li>
+                                @if ($order->return_reason != null)
+                                <li class="list-group-item">
+                                    <span style="background-color: red;">You Have Send a Return Request</span>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -108,9 +116,14 @@
                         </tbody>
                     </table>
                 </div>
-                    @if ($order->state == 'delivered')
+                    @if ($order->status == 'Delivered' && $order->return_reason == null)
                         <div class="col-md-12 offset-md-3 col-sm-12">
-                            <textarea name="" id="" placeholder="Return Reason" cols="150" rows="5"></textarea>
+                            <form action="{{ route('return-reason') }}" method="post">
+                                @csrf
+                                <textarea name="return_reason" id="" placeholder="Return Reason" cols="150" rows="5"></textarea>
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <button type="submit" class="btn btn-success pull-right mt-3">Submit</button>
+                            </form>
                         </div>
                     @else
                         

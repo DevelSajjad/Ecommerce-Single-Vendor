@@ -8,6 +8,8 @@
         <ul class="list-group list-group-flush">
             <a href="<?php echo e(route('user.dashboard')); ?>" class="btn btn-primary btn-sm btn-block">Home</a>
             <a href="<?php echo e(route('order-list')); ?>" class="btn btn-primary btn-sm btn-block">My Orders</a>
+            <a href="<?php echo e(route('return-order-list')); ?>" class="btn btn-primary btn-sm btn-block">Return Orders</a>
+            <a href="<?php echo e(route('cancel-order-list')); ?>" class="btn btn-primary btn-sm btn-block">Cancel Orders</a>
             <a href="<?php echo e(route('user-image')); ?>" class="btn btn-primary btn-sm btn-block">Update Image</a>
             <a href="<?php echo e(route('update-password')); ?>" class="btn btn-primary btn-sm btn-block">Change Password</a>
             <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-danger btn-sm btn-block">Logout</a>
