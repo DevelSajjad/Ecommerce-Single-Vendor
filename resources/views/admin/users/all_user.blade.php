@@ -49,11 +49,11 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>
-                                {{-- @if ($user->userIsOnline()) --}}
+                                @if ($user->userOnline())
                                     <span class="badge badge-pill badge-success">Active Now</span>
-                                {{-- @else --}}
-                                    {{-- <span class="badge badge-pill badge-danger">{{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}</span> --}}
-                                {{-- @endif --}}
+                                @else
+                                    <span class="badge badge-pill badge-danger">{{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}</span>
+                                @endif
                             </td>
                             <td>
                                 @if ($user->is_bann == 0)

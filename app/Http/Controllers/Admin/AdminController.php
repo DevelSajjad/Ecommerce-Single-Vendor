@@ -32,7 +32,7 @@ class AdminController extends Controller
     public function banned($user_id)
     {
         User::findOrFail($user_id)->update([
-            'is_bann' => 0
+            'is_bann' => 1
         ]);
         return redirect()->back()->with('message', 'This Account is Unbanned');
     }
