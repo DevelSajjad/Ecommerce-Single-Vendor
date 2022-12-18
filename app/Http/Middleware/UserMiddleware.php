@@ -34,7 +34,7 @@ class UserMiddleware
 
         //user active and inactive
         if(Auth::check()) {
-            $expire = Carbon::now()->addSecond(120);
+            $expire = Carbon::now()->addMinutes(15);
             Cache::put('user_online'. Auth::user()->id, true, $expire );
             User::where('id', Auth::user()->id)->update([
                 'last_seen' => Carbon::now()

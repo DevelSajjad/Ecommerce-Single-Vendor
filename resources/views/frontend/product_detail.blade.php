@@ -402,16 +402,16 @@
 							<div class="action">
 								<ul class="list-unstyled">
 									<li class="add-cart-button btn-group">
-										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+										<button class="btn btn-primary icon" id="{{ $product->id }}" onclick="productView(this.id)" type="button" data-toggle="modal" title="Cart" data-target="#cartModal">
 											<i class="fa fa-shopping-cart"></i>
 										</button>
 										<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
 									</li>
 
-									<li class="lnk wishlist">
-										<a class="add-to-cart" href="detail.html" title="Wishlist">
+									<li class="add-cart-button btn-group">
+										<button class="btn btn-primary icon" id="{{ $product->id }}" onclick="addtoWishlist(this.id)" type="button" title="Wishlist">
 											<i class="icon fa fa-heart"></i>
-										</a>
+										</button>
 									</li>
 
 									<li class="lnk">

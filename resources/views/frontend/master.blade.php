@@ -204,6 +204,7 @@
                                 @foreach ($categories as $category)
                                     <li class="dropdown yamm mega-menu">
                                         <a href="" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ (session('language') == 'english') ? $category->category_name_en : $category->category_name_bn }}</a>
+                                        @if ($category->subCategories->isNotEmpty())
                                         <ul class="dropdown-menu container">
                                             <li>
                                                 <div class="yamm-content ">
@@ -213,13 +214,13 @@
                                                         @endphp
                                                         @foreach ($subcategories as $subcategory)
                                                         <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                            <h2 class="title">{{ (session('language') == 'english') ? $subcategory->subcategory_name_en : $subcategory->subcategory_name_bn }}</h2>
+                                                            <a href="{{ url('subcategory/product', $subcategory->id.'/'.$subcategory->subcategory_slug_en) }}"><h2 class="title">{{ (session('language') == 'english') ? $subcategory->subcategory_name_en : $subcategory->subcategory_name_bn }}</h2></a>
                                                             @php
                                                                 $subsubcategories = App\Models\Subsubcategory::where('subcategory_id', $subcategory->id)->orderBy('subsubcategory_name_en','asc')->get();   
                                                             @endphp
                                                             @foreach ($subsubcategories as $subsubcategory)
                                                             <ul class="links">
-                                                                <li><a href="#">{{ (session('language') == 'english') ? $subsubcategory->subsubcategory_name_en : $subsubcategory->subsubcategory_name_bn }}</a></li>
+                                                                <li><a href="{{ url('subsubcategory/product', $subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en) }}">{{ (session('language') == 'english') ? $subsubcategory->subsubcategory_name_en : $subsubcategory->subsubcategory_name_bn }}</a></li>
                                                             </ul>
                                                             @endforeach
                                                         </div><!-- /.col -->
@@ -231,6 +232,7 @@
                                                 </div>
                                             </li>
                                         </ul>
+                                        @endif
                                     </li>
                                 @endforeach
                                 <li class="dropdown  navbar-right special-menu">

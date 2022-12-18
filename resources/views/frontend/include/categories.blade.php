@@ -8,7 +8,8 @@ $categories = App\Models\Category::orderBy('category_name_en', 'asc')->get();
 			@foreach ($categories as $category)
             <li class="dropdown menu-item">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="{{ $category->category_icon }}" aria-hidden="true"></i> {{ (session()->get('language') == 'english') ? $category->category_name_en : $category->category_name_bn }}</a>
-                 <ul class="dropdown-menu mega-menu">
+				@if ($category->subCategories->isNotEmpty())
+				<ul class="dropdown-menu mega-menu">
 					<li class="yamm-content">
 						<div class="row">
                             {{-- @dd(__DIR__) --}}
@@ -27,7 +28,9 @@ $categories = App\Models\Category::orderBy('category_name_en', 'asc')->get();
 							@endforeach
 						</div><!-- /.row -->
 					</li><!-- /.yamm-content -->
-				</ul><!-- /.dropdown-menu -->            
+				</ul>
+				@endif
+				<!-- /.dropdown-menu -->            
 			</li><!-- /.menu-item -->
 			@endforeach
         </ul><!-- /.nav -->

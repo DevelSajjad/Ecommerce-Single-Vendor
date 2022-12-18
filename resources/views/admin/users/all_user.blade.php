@@ -6,25 +6,22 @@
           <a class="breadcrumb-item" href="index.html">GramMela</a>
           <span class="breadcrumb-item active">All Users</span>
         </nav>
-
         <div class="sl-pagebody">
           <div class="row row-sm">
             <div class="col-md-12">
               <div class="card">
-                  {{-- @php
-                      $online_user = 0;
-                  @endphp
-                  @foreach ($users as $row)
+                @php
+                  $online_user = 0;
+                @endphp
+                @foreach ($users as $row )
                   @php
-                      if($row->userIsOnline()){
-                        $online_user = $online_user + 1;
-                      }
+                    if ($row->userOnline()) {
+                      $online_user += 1;
+                    }
                   @endphp
-                  @endforeach
-                <div class="card-header"> Total Users {{ count($users) }}
-                    and Active Users <span class="badge badge-pill badge-success">{{ $online_user }} </span>
+                @endforeach
+                <div class="card-header">Total User: {{ count($users) }} and Active Users: <span class="badge badge-pill badge-success">{{ $online_user }}</span> </div>
 
-                </div> --}}
                 <div class="card-body">
                 <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">

@@ -67,7 +67,7 @@
 					<div class="cart clearfix animate-effect">
 						<div class="action">
 							<div class="add-cart-button btn-group">
-								<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+								<button class="btn btn-primary icon" id="{{ $product->id }}" onclick="productView(this.id)" type="button" data-toggle="modal" title="Cart" data-target="#cartModal">
 									<i class="fa fa-shopping-cart"></i>
 								</button>
 								<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
