@@ -17,6 +17,9 @@
 		<div class="sign-in-page">
 			<div class="row">
 				<!-- Sign-in -->
+				@error('banned')
+					<h4 class="text-danger text-center"> {{ $message }}</h4>
+				@enderror
 <div class="col-md-6 col-sm-6 sign-in">
 	<h4 class="">Sign in</h4>
 	<p class="">Hello, Welcome to your account.</p>

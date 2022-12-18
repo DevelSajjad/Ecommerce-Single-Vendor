@@ -17,6 +17,16 @@
 		<div class="sign-in-page">
 			<div class="row">
 				<!-- Sign-in -->
+				<?php $__errorArgs = ['banned'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+					<h4 class="text-danger text-center"> <?php echo e($message); ?></h4>
+				<?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 <div class="col-md-6 col-sm-6 sign-in">
 	<h4 class="">Sign in</h4>
 	<p class="">Hello, Welcome to your account.</p>

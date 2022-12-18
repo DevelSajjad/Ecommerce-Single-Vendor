@@ -18,8 +18,23 @@ class AdminController extends Controller
 
     public function allUsers()
     {
-        $users = User::where('role_id', '!=', 1)->orderBy('id', 'desc')->get();
+        $users = User::withoutAdmin()->orderByDesc()->get();
         return view('admin.users.all_user', compact('users'));
+    }
+
+    public function unbanned($user_id)
+    {
+        User::findOrFail($user_id)->update([
+            'is_bann' => 0
+        ]);
+        return redirect()->back()->with('message', 'This Account is Unbanned');
+    }
+    public function banned($user_id)
+    {
+        User::findOrFail($user_id)->update([
+            'is_bann' => 0
+        ]);
+        return redirect()->back()->with('message', 'This Account is Unbanned');
     }
 
     public function editPage() {

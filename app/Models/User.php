@@ -25,6 +25,8 @@ class User extends Authenticatable
         'image',
         'password',
         'role_id',
+        'is_bann',
+        'last_seen',
     ];
 
     /**
@@ -48,5 +50,14 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Models\Role');
+    }
+
+    public function scopeWithoutAdmin($query)
+    {
+        return $query->where('role_id', '!=', 1);
+    }
+    public function scopeOrderByDesc($query)
+    {
+        return $query->orderBy('id', 'Desc');
     }
 }

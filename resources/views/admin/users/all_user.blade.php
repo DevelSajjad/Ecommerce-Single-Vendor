@@ -55,20 +55,20 @@
                                     {{-- <span class="badge badge-pill badge-danger">{{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}</span> --}}
                                 {{-- @endif --}}
                             </td>
-                            {{-- <td>
-                                @if ($user->isban == 0)
+                            <td>
+                                @if ($user->is_bann == 0)
                                     <span class="badge badge-pill badge-primary">Unbanned</span>
                                 @else
                                     <span class="badge badge-pill badge-danger">Banned</span>
                                 @endif
-                            </td> --}}
-                            {{-- <td>
-                            @if ($user->isban == 0)
-                            <a href="{{ url('admin/user-banned/'.$user->id) }}" class="btn btn-sm btn-danger" title="view data"> <i class="fa fa-arrow-down"></i> Banned</a>
-                            @else
-                              <a href="{{ url('admin/user-unbanned/'.$user->id) }}" class="btn btn-sm btn-primary" title="view data"> <i class="fa fa-arrow-up"></i> Unbanned</a>
-                            @endif
-                            </td> --}}
+                            </td>
+                            <td>
+                                @if ($user->is_bann == 0)
+                                <a href="{{ url('admin/user-banned/'.$user->id) }}" class="btn btn-sm btn-danger" title="view data"> <i class="fa fa-arrow-down"></i> Banned</a>
+                                @else
+                                  <a href="{{ url('admin/user-unbanned/'.$user->id) }}" class="btn btn-sm btn-primary" title="view data"> <i class="fa fa-arrow-up"></i> Unbanned</a>
+                                @endif
+                            </td>
                           </tr>
                           @endforeach
                         </tbody>

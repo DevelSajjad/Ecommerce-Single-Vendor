@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('phone')->nullable();
             $table->integer('role_id')->default(2);
+            $table->tinyInteger('is_bann')->default(0);
+            $table->string('last_seen')->nullable();
             $table->string('email')->unique();
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
