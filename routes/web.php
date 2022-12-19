@@ -13,6 +13,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\TrackController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
@@ -227,6 +228,8 @@ Route::get('/user/checkout', [CartController::class, 'checkout'])->name('checkou
 
 ///Track Order Route
 Route::post('track/order', [TrackController::class, 'trackOrder'])->name('track_order');
+//Serach Route
+Route::get('/search/product', [SearchController::class, 'searchProduct'])->name('search');
 
 Route::get('/cache-clear', function() {
     Artisan::call('cache:clear');

@@ -29,28 +29,28 @@
 		<div class='row single-product'>
 			<div class='col-md-3 sidebar'>
 				<div class="sidebar-module-container">
-				<div class="home-banner outer-top-n">
-<img src="{{ asset('/') }}fontend/assets/images/banners/LHS-banner.jpg" alt="Image">
-</div>		
+					<div class="home-banner outer-top-n">
+						<img src="{{ asset('/') }}fontend/assets/images/banners/LHS-banner.jpg" alt="Image">
+					</div>		
   
 <!-- ============================================== HOT DEALS ============================================== -->
 	@include('frontend.include.hot_deals')
 <!-- ============================================== HOT DEALS: END ============================================== -->					<!-- ============================================== 
 
 <!-- ============================================== NEWSLETTER ============================================== -->
-<div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
-	<h3 class="section-title">Newsletters</h3>
-	<div class="sidebar-widget-body outer-top-xs">
-		<p>Sign Up for Our Newsletter!</p>
-        <form role="form">
-        	 <div class="form-group">
-			    <label class="sr-only" for="exampleInputEmail1">Email address</label>
-			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-			  </div>
-			<button class="btn btn-primary">Subscribe</button>
-		</form>
-	</div><!-- /.sidebar-widget-body -->
-</div><!-- /.sidebar-widget -->
+			<div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
+				<h3 class="section-title">Newsletters</h3>
+				<div class="sidebar-widget-body outer-top-xs">
+					<p>Sign Up for Our Newsletter!</p>
+					<form role="form">
+						<div class="form-group">
+							<label class="sr-only" for="exampleInputEmail1">Email address</label>
+							<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
+						</div>
+						<button class="btn btn-primary">Subscribe</button>
+					</form>
+				</div><!-- /.sidebar-widget-body -->
+			</div><!-- /.sidebar-widget -->
 <!-- ============================================== NEWSLETTER: END ============================================== -->
 
 <!-- ============================================== Testimonials============================================== -->
@@ -326,7 +326,8 @@
 															<button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
 														</div><!-- /.action -->
 
-													</form><!-- /.cnt-form -->
+													</form><!-- /.cnt-form --> <br>
+													<div class="fb-comments" data-href="{{ Request::url() }}" data-width="" data-numposts="5"></div>
 												</div><!-- /.form-container -->
 											</div><!-- /.review-form -->
 
@@ -365,6 +366,7 @@
 
 							</div><!-- /.tab-content -->
 						</div><!-- /.col -->
+						
 					</div><!-- /.row -->
 				</div><!-- /.product-tabs -->
 
@@ -437,5 +439,6 @@
 
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0" nonce="JlmGTl9k"></script>
 @endsection

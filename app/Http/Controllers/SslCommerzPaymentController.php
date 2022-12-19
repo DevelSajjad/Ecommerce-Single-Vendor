@@ -252,7 +252,7 @@ class SslCommerzPaymentController extends Controller
                 
                 $update_product = DB::table('orders')
                     ->where('transaction_id', $tran_id)
-                    ->update(['status' => 'Processing']);
+                    ->update(['status' => 'Processing', 'processing_date' => Carbon::now()->format('d F Y') ]);
 
                 echo "<br >Transaction is successfully Completed";
                 $mailData = [
