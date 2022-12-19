@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PDF;
 class OrderController extends Controller
@@ -55,27 +56,27 @@ class OrderController extends Controller
     ///Order Status Update
     public function pendingToConfirm($order_id)
     {
-        Order::findOrFail($order_id)->update(['status' => 'Confirm']);
+        Order::findOrFail($order_id)->update(['status' => 'Confirm', 'confirm_date' => Carbon::now()->format('d F Y')]);
         return redirect()->route('pending-order')->with('message', 'This Order is Confirmed');
     }
     public function confirmToProcess($order_id)
     {
-        Order::findOrFail($order_id)->update(['status' => 'Processing']);
+        Order::findOrFail($order_id)->update(['status' => 'Processing', 'processing_date' => Carbon::now()->format('d F Y')]);
         return redirect()->route('confirm-order')->with('message', 'This Order is Processing');
     }
     public function processToPicked($order_id)
     {
-        Order::findOrFail($order_id)->update(['status' => 'Picked']);
+        Order::findOrFail($order_id)->update(['status' => 'Picked', 'picked_date' => Carbon::now()->format('d F Y')]);
         return redirect()->route('processing-order')->with('message', 'This Order is Picked');
     }
     public function pickedToShipped($order_id)
     {
-        Order::findOrFail($order_id)->update(['status' => 'Shipping']);
+        Order::findOrFail($order_id)->update(['status' => 'Shipping', 'shipped_date' => Carbon::now()->format('d F Y')]);
         return redirect()->route('picked-order')->with('message', 'This Order is Shipping');
     }
     public function shippedToDeliver($order_id)
     {
-        Order::findOrFail($order_id)->update(['status' => 'Delivered']);
+        Order::findOrFail($order_id)->update(['status' => 'Delivered', 'delivered_date' => Carbon::now()->format('d F Y')]);
         return redirect()->route('shipped-order')->with('message', 'This Order is Deliver');
     }
     ///Invoice Download

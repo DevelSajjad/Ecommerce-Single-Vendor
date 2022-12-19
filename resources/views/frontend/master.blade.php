@@ -65,14 +65,33 @@
 
                 <div class="cnt-block">
                     <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small">
-                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
-                            </ul>
+                        <li class="drl">
+                            <a href="#"  data-toggle="modal" data-target="#exampleModal" ><span class="value">Track Order </span></a>
                         </li>
+                        {{-- track order modal --}}
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form action="{{ route('track_order') }}" method="post">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <h5>Invoice No</h5>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <input class="form-control" name="invoice_no" type="text" placeholder="Invoive Number">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- track order modal --}}
 
                         <li class="dropdown dropdown-small">
                             <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">{{ (session()->get('language') == 'english') ? 'English' : 'ভাষা পরিবর্তন' }} </span><b class="caret"></b></a>

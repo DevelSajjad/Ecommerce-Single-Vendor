@@ -8,10 +8,12 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\TrackController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\UserController;
@@ -219,6 +221,12 @@ Route::get('/coupon/calculation', [CartController::class, 'couponCalculation']);
 Route::get('/coupon/remove', [CartController::class, 'couponRemove']);
 /////////CheckOut//////////
 Route::get('/user/checkout', [CartController::class, 'checkout'])->name('checkout');
+///Socialite
+// Route::get('login/google', [LoginController::class, 'redirectGoogle'])->name('google');
+// Route::get('login/google/callback', [LoginController::class, 'googleCallback']);
+
+///Track Order Route
+Route::post('track/order', [TrackController::class, 'trackOrder'])->name('track_order');
 
 Route::get('/cache-clear', function() {
     Artisan::call('cache:clear');

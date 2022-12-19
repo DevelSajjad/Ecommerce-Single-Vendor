@@ -30,16 +30,17 @@
     26 => 'Intervention\\Image\\ImageServiceProvider',
     27 => 'Laravel\\Sail\\SailServiceProvider',
     28 => 'Laravel\\Sanctum\\SanctumServiceProvider',
-    29 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    30 => 'Laravel\\Ui\\UiServiceProvider',
-    31 => 'Carbon\\Laravel\\ServiceProvider',
-    32 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    33 => 'Orangehill\\Iseed\\IseedServiceProvider',
-    34 => 'Intervention\\Image\\ImageServiceProvider',
-    35 => 'App\\Providers\\AppServiceProvider',
-    36 => 'App\\Providers\\AuthServiceProvider',
-    37 => 'App\\Providers\\EventServiceProvider',
-    38 => 'App\\Providers\\RouteServiceProvider',
+    29 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    30 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    31 => 'Laravel\\Ui\\UiServiceProvider',
+    32 => 'Carbon\\Laravel\\ServiceProvider',
+    33 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    34 => 'Orangehill\\Iseed\\IseedServiceProvider',
+    35 => 'Intervention\\Image\\ImageServiceProvider',
+    36 => 'App\\Providers\\AppServiceProvider',
+    37 => 'App\\Providers\\AuthServiceProvider',
+    38 => 'App\\Providers\\EventServiceProvider',
+    39 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -193,6 +194,7 @@
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Socialite\\Contracts\\Factory' => 'Laravel\\Socialite\\SocialiteServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
@@ -234,6 +236,9 @@
     array (
     ),
     'Laravel\\Sail\\SailServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Socialite\\SocialiteServiceProvider' => 
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
