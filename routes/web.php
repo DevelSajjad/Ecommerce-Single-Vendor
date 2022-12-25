@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Auth\LoginController;
@@ -21,7 +22,9 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\User\ReviewController;
 use Illuminate\Support\Facades\Artisan;
+use Stripe\Review;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,6 +151,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('/report/search-by-date', [ReportController::class, 'dateReports'])->name('search-by-date');
     Route::post('/report/search-by-month', [ReportController::class, 'monthReports'])->name('search-by-month');
     Route::post('/report/search-by-year', [ReportController::class, 'yearReports'])->name('search-by-year');
+    //Review
+    Route::get('/review/list', [AdminReviewController::class, 'review'])->name('admin-review');
+    Route::get('/review/approve/{id}', [AdminReviewController::class, 'reviewApprove']);
+    Route::get('/review/delete/{id}', [AdminReviewController::class, 'reviewDelete']);
 });
 
 //*********************************************User Route*********************************************** */
@@ -178,6 +185,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::post('/return-reason', [UserController::class, 'returnReason'])->name('return-reason');
     Route::get('/return-order', [UserController::class, 'returnOrder'])->name('return-order-list');
     Route::get('/cancel-order', [UserController::class, 'cancelOrder'])->name('cancel-order-list');
+
+    //review
+    Route::get('/review/{id}', [ReviewController::class, 'review']);
+    Route::post('/store/review', [ReviewController::class, 'addReview'])->name('review');
 });
 Route::group(['middleware' => ['user', 'auth']], function () {
     // SSLCOMMERZ Start
@@ -230,6 +241,7 @@ Route::get('/user/checkout', [CartController::class, 'checkout'])->name('checkou
 Route::post('track/order', [TrackController::class, 'trackOrder'])->name('track_order');
 //Serach Route
 Route::get('/search/product', [SearchController::class, 'searchProduct'])->name('search');
+
 
 Route::get('/cache-clear', function() {
     Artisan::call('cache:clear');

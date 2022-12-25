@@ -131,7 +131,7 @@
     <form action="<?php echo e(route('search')); ?>" method="GET" >
         <div class="control-group">
 
-            <input class="search-field" name="search" placeholder="Search here..." />
+            <input class="search-field" id="search" name="search" placeholder="Search here..." />
             <button type="submit" class="search-button" ></button>
         </div>
     </form>
@@ -798,6 +798,9 @@
         })
     }
 </script>
+
+
+
 
 <?php echo $__env->yieldContent('js'); ?>
 

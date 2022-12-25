@@ -39,6 +39,12 @@
             <span class="menu-item-label">Report</span>
           </div>
         </a>
+        <a href="{{ route('admin-review') }}" class="sl-menu-link @yield('review') " >
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+            <span class="menu-item-label">Review</span>
+          </div>
+        </a>
         <a href="#" class="sl-menu-link @yield('order') show-sub">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>

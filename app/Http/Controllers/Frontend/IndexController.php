@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
+use App\Models\ProductReview;
 use App\Models\Slider;
 
 class IndexController extends Controller
@@ -41,6 +42,9 @@ class IndexController extends Controller
         $data['color_en'] = explode(',' , $data['products']->product_color_en);
         $data['color_bn'] = explode(',' , $data['products']->product_color_bn);
         $data['related_products'] = Product::where('status', 1)->where('category_id', $data['products']->category_id)->orderBy('id', 'desc')->get();
+        $data['reviews'] = ProductReview::with('user')->where('status', 'Approve')->where('product_id', $product_id)->latest()->get();
+        $rating = ProductReview::where('product_id', $product_id)->where('status', 'Approve')->avg('rating');
+        $data['avgRating'] = number_format($rating, 1);
         return view('frontend.product_detail', $data);
     }
     public function tagWiseProduct($tag)

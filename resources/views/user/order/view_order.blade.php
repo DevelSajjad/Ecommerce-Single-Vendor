@@ -100,6 +100,7 @@
                                 <th>Product Size</th>
                                 <th>Product QTY</th>
                                 <th>Product Price</th>
+                                <th>{{ $order->status == 'Delivered' ? 'Review' : '' }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,6 +112,7 @@
                                     <td>{{ $order_item->size }}</td>
                                     <td>{{ $order_item->qty }}</td>
                                     <td>{{ $order_item->price }} TK</td>
+                                    <td><a href="{{ url('user/review/' . $order_item->product_id) }}" >{{ $order->status == 'Delivered' ? 'Review' : '' }}</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

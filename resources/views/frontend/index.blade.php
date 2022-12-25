@@ -251,7 +251,19 @@
 
 								<div class="product-info text-left">
 									<h3 class="name"><a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn }}</a></h3>
-									<div class="rating rateit-small"></div>
+									<div class="">
+										@if (App\Models\ProductReview::where('product_id', $product->id)->first())
+											@php
+												$rating = App\Models\ProductReview::where('product_id', $product->id)->where('status', 'Approve')->avg('rating');
+												$avgRating = number_format($rating, 1);
+											@endphp
+											@for ($i = 1; $i <= 5; $i++)
+												<span class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}" style ="color: red"> </span>
+											@endfor
+											@else
+											<span class="text-danger">No Review</span>
+										@endif
+									</div>
 									<div class="description"></div>
 									<div class="product-price">
 										<span class="price"> TK {{ (session()->get('language') == 'english') ? $product->selling_price : priceBn($product->selling_price)  }} </span>
@@ -413,7 +425,19 @@
 						
 						<div class="product-info text-left">
 							<h3 class="name"><a href="{{ url('single-product-detail',$featured->id.'/'.$featured->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $featured->product_name_en : $featured->product_name_bn }}</a></h3>
-							<div class="rating rateit-small"></div>
+							<div class="">
+								@if (App\Models\ProductReview::where('product_id', $featured->id)->first())
+									@php
+										$rating = App\Models\ProductReview::where('product_id', $featured->id)->where('status', 'Approve')->avg('rating');
+										$avgRating = number_format($rating, 1);
+									@endphp
+									@for ($i = 1; $i <= 5; $i++)
+										<span class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}" style ="color: red"> </span>
+									@endfor
+								@else
+									<span class="text-danger">No Review</span>
+								@endif
+							</div>
 							<div class="description"></div>
 
 							<div class="product-price">
@@ -471,7 +495,19 @@
 
 						<div class="product-info text-left">
 							<h3 class="name"><a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn }}</a></h3>
-							<div class="rating rateit-small"></div>
+							<div class="">
+								@if (App\Models\ProductReview::where('product_id', $product->id)->first())
+									@php
+										$rating = App\Models\ProductReview::where('product_id', $product->id)->where('status', 'Approve')->avg('rating');
+										$avgRating = number_format($rating, 1);
+									@endphp
+									@for ($i = 1; $i <= 5; $i++)
+										<span class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}" style ="color: red"> </span>
+									@endfor
+								@else
+									<span class="text-danger">No Review</span>
+								@endif
+							</div>
 							<div class="description"></div>
 
 							<div class="product-price">
@@ -528,7 +564,19 @@
 
 						<div class="product-info text-left">
 							<h3 class="name"><a href="{{ url('single-product-detail',$product->id.'/'.$product->product_slug_en ) }}">{{ (session()->get('language') == 'english') ? $product->product_name_en : $product->product_name_bn }}</a></h3>
-							<div class="rating rateit-small"></div>
+							<div class="">
+								@if (App\Models\ProductReview::where('product_id', $product->id)->first())
+									@php
+										$rating = App\Models\ProductReview::where('product_id', $product->id)->where('status', 'Approve')->avg('rating');
+										$avgRating = number_format($rating, 1);
+									@endphp
+									@for ($i = 1; $i <= 5; $i++)
+										<span class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}" style ="color: red"> </span>
+									@endfor
+								@else
+									<span class="text-danger">No Review</span>
+								@endif
+							</div>
 							<div class="description"></div>
 
 							<div class="product-price">

@@ -23,4 +23,19 @@ class SearchController extends Controller
         $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
          return view('frontend.search_product', $data);  
     } 
+
+    public function autoSearchProduct(Request $request)
+    {
+        
+        $data['products'] = Product::where('product_name_en', 'LIKE', '%'.$request->search.'%')
+                                ->orWhere('product_name_bn', 'LIKE'.'%'.$request->search.'%')
+                                ->orWhere('product_tags_en', 'LIKE'.'%'.$request->search.'%')
+                                ->orWhere('product_tags_bn', 'LIKE'.'%'.$request->search.'%')
+                                ->orWhere('product_code', 'LIKE'.'%'.$request->search.'%')
+                                ->orWhere('product_color_en', 'LIKE'.'%'.$request->search.'%')
+                                ->take(5)->get();
+        
+        $data['categories'] = Category::orderBy('category_name_en', 'asc')->get();
+         return view('frontend.auto_search_product', $data);  
+    } 
 }
