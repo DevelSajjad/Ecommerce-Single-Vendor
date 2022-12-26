@@ -68,6 +68,19 @@
           <li class="nav-item"><a href="{{ route('delivered-order') }}" class="nav-link @yield('delivered') ">Deliver</a></li>
           <li class="nav-item"><a href="{{ route('cancel-order') }}" class="nav-link @yield('cancel') ">Cancel</a></li>
         </ul>
+
+        <a href="#" class="sl-menu-link @yield('role') show-sub">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon fa fa-list-alt tx-20"></i>
+            <span class="menu-item-label">Role</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('role.create') }}" class="nav-link @yield('add-role') ">Add Role</a></li>
+          <li class="nav-item"><a href="{{ route('role.index') }}" class="nav-link @yield('all-role') ">All Role</a></li>
+        </ul>
+
         <a href="#" class="sl-menu-link @yield('categories') show-sub">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>

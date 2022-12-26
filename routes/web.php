@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\StockMangeController;
@@ -45,7 +46,7 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //*********************************************Admin Route******************************************** */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace' => 'App\Http\Controllers\Admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']],  function () {
     Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
     // **************************Admin Profile***************************
     Route::get('edit-page',[AdminController::class,'editPage'])->name('edit-page');
@@ -161,10 +162,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/product/stock/manage', [StockMangeController::class, 'index'])->name('stock-manage');
     Route::get('/edit-stock-product/{id}', [StockMangeController::class, 'editStock']);
     Route::post('/admin/update/stock/{id}', [StockMangeController::class, 'updateStock'])->name('update-stock');
+
+    //Role route
+    Route::resource('/role', RoleController::class);
+
 });
 
 //*********************************************User Route*********************************************** */
-Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth']],  function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::post('/update/profile',[UserController::class,'updateProfile'])->name('update.profile');
     Route::get('/userimage',[UserController::class,'userImage'])->name('user-image');
