@@ -52,7 +52,7 @@
           </div>
         </a>
         
-        <a href="#" class="sl-menu-link @yield('order') show-sub">
+        <a href="#" class="sl-menu-link @yield('order')">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
             <span class="menu-item-label">Orders</span>
@@ -69,7 +69,7 @@
           <li class="nav-item"><a href="{{ route('cancel-order') }}" class="nav-link @yield('cancel') ">Cancel</a></li>
         </ul>
 
-        <a href="#" class="sl-menu-link @yield('role') show-sub">
+        <a href="#" class="sl-menu-link @yield('role')">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
             <span class="menu-item-label">Role</span>
@@ -81,7 +81,19 @@
           <li class="nav-item"><a href="{{ route('role.index') }}" class="nav-link @yield('all-role') ">All Role</a></li>
         </ul>
 
-        <a href="#" class="sl-menu-link @yield('categories') show-sub">
+        <a href="#" class="sl-menu-link @yield('role-permission')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon fa fa-list-alt tx-20"></i>
+            <span class="menu-item-label">Role-Permission</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('permission.create') }}" class="nav-link @yield('add-role-permisson') ">Add Role-Permission</a></li>
+          <li class="nav-item"><a href="{{ route('permission.index') }}" class="nav-link @yield('all-role-permission') ">All Role-Permission</a></li>
+        </ul>
+
+        <a href="#" class="sl-menu-link @yield('categories')">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
             <span class="menu-item-label">Categories</span>
@@ -94,7 +106,7 @@
           <li class="nav-item"><a href="{{ route('sub-sub-category') }}" class="nav-link @yield('subsubcategory') ">Add Sub-Sub-Category</a></li>
         </ul>
         
-        <a href="#" class="sl-menu-link  show-sub">
+        <a href="#" class="sl-menu-link  ">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
             <span class="menu-item-label @yield('products')">Products</span>
@@ -106,7 +118,7 @@
           <li class="nav-item"><a href="{{ route('manage-product') }}" class="nav-link @yield('manage-product') ">Manage Product</a></li>
         </ul>
 
-        <a href="#" class="sl-menu-link  show-sub">
+        <a href="#" class="sl-menu-link  ">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
             <span class="menu-item-label @yield('ship')">Ship Area</span>

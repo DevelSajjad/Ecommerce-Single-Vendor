@@ -12,7 +12,13 @@ class Role extends Model
     protected $fillable = [
         'name',
     ];
-public function user(){
-    return $this->hasMany('App\Models\User');
-}
+    public function user(){
+        return $this->hasMany('App\Models\User');
+    }
+
+    public function permission()
+    {
+        return $this->hasOne(Permission::class, 'role_id');
+    }
+
 }

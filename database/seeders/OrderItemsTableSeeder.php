@@ -91,6 +91,42 @@ class OrderItemsTableSeeder extends Seeder
                 'created_at' => '2022-12-14 11:53:56',
                 'updated_at' => NULL,
             ),
+            6 => 
+            array (
+                'id' => 7,
+                'order_id' => 7,
+                'product_id' => 10,
+                'color' => 'Silver',
+                'size' => '43 inch',
+                'qty' => '1',
+                'price' => 200000.0,
+                'created_at' => '2022-12-19 11:57:19',
+                'updated_at' => NULL,
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'order_id' => 8,
+                'product_id' => 9,
+                'color' => 'Black',
+                'size' => '19.90 x 328.70 x 239.50mm',
+                'qty' => '1',
+                'price' => 178000.0,
+                'created_at' => '2022-12-25 12:56:00',
+                'updated_at' => NULL,
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'order_id' => 9,
+                'product_id' => 11,
+                'color' => 'Black',
+                'size' => '27 Inch',
+                'qty' => '3',
+                'price' => 50500.0,
+                'created_at' => '2022-12-26 06:45:58',
+                'updated_at' => NULL,
+            ),
         ));
         
         

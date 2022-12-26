@@ -29,6 +29,22 @@ class WishlistsTableSeeder extends Seeder
             ),
             1 => 
             array (
+                'id' => 10,
+                'user_id' => 2,
+                'product_id' => 11,
+                'created_at' => '2022-12-18 14:48:41',
+                'updated_at' => NULL,
+            ),
+            2 => 
+            array (
+                'id' => 11,
+                'user_id' => 4,
+                'product_id' => 11,
+                'created_at' => '2022-12-18 15:35:12',
+                'updated_at' => NULL,
+            ),
+            3 => 
+            array (
                 'id' => 4,
                 'user_id' => 2,
                 'product_id' => 8,

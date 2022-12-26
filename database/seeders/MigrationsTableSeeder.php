@@ -139,6 +139,18 @@ class MigrationsTableSeeder extends Seeder
                 'migration' => '2022_11_24_024504_create_order_items_table',
                 'batch' => 12,
             ),
+            20 => 
+            array (
+                'id' => 23,
+                'migration' => '2022_12_24_062905_create_product_reviews_table',
+                'batch' => 13,
+            ),
+            21 => 
+            array (
+                'id' => 24,
+                'migration' => '2022_12_26_134145_create_permissions_table',
+                'batch' => 14,
+            ),
         ));
         
         

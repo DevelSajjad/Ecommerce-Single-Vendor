@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
@@ -165,6 +166,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']],  function
 
     //Role route
     Route::resource('/role', RoleController::class);
+    //Role Permission
+    Route::resource('/permission', PermissionController::class);
 
 });
 
