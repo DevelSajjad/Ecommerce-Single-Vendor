@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\StockMangeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\CartController;
@@ -155,6 +156,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('/review/list', [AdminReviewController::class, 'review'])->name('admin-review');
     Route::get('/review/approve/{id}', [AdminReviewController::class, 'reviewApprove']);
     Route::get('/review/delete/{id}', [AdminReviewController::class, 'reviewDelete']);
+
+    //Stock Manage
+    Route::get('/product/stock/manage', [StockMangeController::class, 'index'])->name('stock-manage');
+    Route::get('/edit-stock-product/{id}', [StockMangeController::class, 'editStock']);
+    Route::post('/admin/update/stock/{id}', [StockMangeController::class, 'updateStock'])->name('update-stock');
 });
 
 //*********************************************User Route*********************************************** */
@@ -234,8 +240,12 @@ Route::get('/coupon/remove', [CartController::class, 'couponRemove']);
 /////////CheckOut//////////
 Route::get('/user/checkout', [CartController::class, 'checkout'])->name('checkout');
 ///Socialite
-// Route::get('login/google', [LoginController::class, 'redirectGoogle'])->name('google');
-// Route::get('login/google/callback', [LoginController::class, 'googleCallback']);
+
+// Route::get('login/facebook/redirect', [LoginController::class, 'redirectFacebook'])->name('facebook');
+// Route::get('login/facebook/callback', [LoginController::class, 'facebookCallback']);
+
+Route::get('login/google/redirect', [LoginController::class, 'redirectGoogle'])->name('google');
+Route::get('login/google/callback', [LoginController::class, 'googleCallback']);
 
 ///Track Order Route
 Route::post('track/order', [TrackController::class, 'trackOrder'])->name('track_order');
