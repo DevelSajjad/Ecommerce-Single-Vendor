@@ -8,6 +8,7 @@ use App\Library\SslCommerz\SslCommerzNotification;
 use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
@@ -264,6 +265,12 @@ class SslCommerzPaymentController extends Controller
                     'amount'    => $request->amount
                 ];
                 Mail::to($request->value_d)->send(new OrderMail($mailData));
+
+                $carts = Cart::content();
+                foreach ($carts as $product) {
+                    Product::where('id', $product->id)->decrement('product_qty', $product->qty);
+                }
+                
                 if(Session::has('coupon')) {
                     Session::forget('coupon');
                 }

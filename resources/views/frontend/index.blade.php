@@ -260,7 +260,7 @@
 											@for ($i = 1; $i <= 5; $i++)
 												<span class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}" style ="color: red"> </span>
 											@endfor
-											@else
+										@else
 											<span class="text-danger">No Review</span>
 										@endif
 									</div>
