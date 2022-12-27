@@ -68,7 +68,8 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
-        return view('admin.permission.edit', compact('permission'));
+        $roles = Role::where('id', '!=', 2)->get();
+        return view('admin.permission.edit', compact('permission', 'roles'));
     }
 
     /**
@@ -81,7 +82,7 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:permissions,name'
+            'role_id' => 'required|numeric|'
         ]);
 
         Permission::findOrFail($id)->update($request->all());

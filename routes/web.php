@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ShipareaController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\StockMangeController;
+use App\Http\Controllers\Admin\SubadminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Frontend\CartController;
@@ -168,6 +169,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']],  function
     Route::resource('/role', RoleController::class);
     //Role Permission
     Route::resource('/permission', PermissionController::class);
+    //Sub Admin 
+    Route::resource('/subadmin', SubadminController::class);
 
 });
 

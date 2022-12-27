@@ -43,7 +43,7 @@
 		    <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
 		    <input type="password" name="password" placeholder="Password"  class="form-control unicase-form-control text-input" id="exampleInputPassword1" required autocomplete="current-password" >
 
-             @error('email')
+             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

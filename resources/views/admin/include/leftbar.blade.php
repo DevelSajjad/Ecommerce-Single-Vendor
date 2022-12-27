@@ -69,6 +69,18 @@
           <li class="nav-item"><a href="{{ route('cancel-order') }}" class="nav-link @yield('cancel') ">Cancel</a></li>
         </ul>
 
+        <a href="#" class="sl-menu-link @yield('subadmin')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon fa fa-list-alt tx-20"></i>
+            <span class="menu-item-label">Sub-Admin</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('subadmin.create') }}" class="nav-link @yield('create-subadmin') ">Create Sub-Admin</a></li>
+          <li class="nav-item"><a href="{{ route('subadmin.index') }}" class="nav-link @yield('all-subadmin') ">SubAdmin Users</a></li>
+        </ul>
+
         <a href="#" class="sl-menu-link @yield('role')">
           <div class="sl-menu-item">
             <i class="menu-item-icon fa fa-list-alt tx-20"></i>
