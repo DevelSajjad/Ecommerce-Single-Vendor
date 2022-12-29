@@ -48,8 +48,8 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //*********************************************Admin Route******************************************** */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']],  function () {
-    Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
+Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth', 'permission']],  function () {
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     // **************************Admin Profile***************************
     Route::get('edit-page',[AdminController::class,'editPage'])->name('edit-page');
     Route::post('admin-update-profile',[AdminController::class,'adminUpdate'])->name('admin.update.profile');
